@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Etudiant;
+use App\Models\Ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +27,8 @@ class EtudiantController extends Controller
     public function create()
     {
         //
-        return view('etudiants.create');
+        $villes = Ville::all();
+        return view('etudiants.create', compact('villes'));
     }
 
     /**
@@ -41,7 +43,7 @@ class EtudiantController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'dob' => $request->dob,
-            'ville' => $request->ville_id,
+            'ville_id' => $request->ville_id,
         ]);
 
         //return $newBlog;
@@ -63,7 +65,8 @@ class EtudiantController extends Controller
     public function edit(Etudiant $etudiant)
     {
         //
-        return view('etudiants.edit', compact('etudiant'));
+        $villes = Ville::all();
+        return view('etudiants.edit', compact('etudiant', 'villes'));
     }
 
     /**
@@ -78,7 +81,7 @@ class EtudiantController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'dob' => $request->dob,
-            'ville' => $request->ville_id,
+            'ville_id' => $request->ville_id,
         ]);
 
         return redirect(route('etudiants.show', $etudiant->id))->withSuccess('Etudiant mis a jour!');;

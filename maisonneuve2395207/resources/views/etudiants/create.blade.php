@@ -30,8 +30,12 @@
                             <input type="date" id="dob" name="dob" class="form-control">
                         </div>
                         <div class="control-group col-12">
-                            <label for="ville">Ville</label>
-                            <input type="text" id="ville" name="ville" class="form-control">
+                            <label for="ville_id">Ville</label>
+                            <select id="ville_id" name="ville_id" class="form-control">
+                                @foreach($villes as $ville)
+                                    <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="card-footer text-center">

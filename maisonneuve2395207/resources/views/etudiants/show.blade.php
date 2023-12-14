@@ -9,10 +9,23 @@
             </h4>
             <hr>
             <p>
-                {!! $etudiant->adresse !!}
+              <strong>adresse: </strong>{!! $etudiant->adresse !!}
             </p>
             <p>
-                <strong>telephone:</strong> {{ $etudiant->phone }}
+              <strong>email: </strong>{!! $etudiant->email !!}
+            </p>
+            <p>
+              <strong>date de naissance: </strong>{!! $etudiant->dob !!}
+            </p>
+            <p>
+              <strong>email: </strong>{!! $etudiant->email !!}
+            </p>
+            <p>
+              <strong>ville: </strong>{{ $etudiant->etudiantHasVille->nom }}
+            </p>
+
+            <p>
+                <strong>telephone: </strong> {{ $etudiant->phone }}
             </p>
         </div>
     </div>
