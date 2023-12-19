@@ -88,7 +88,7 @@ class EtudiantController extends Controller
             'nom' => 'min:2|max:45',
             'adresse' => 'required|min:2|max:255',
             'phone' => 'required|min:10|max:20',
-            'email' => 'email|required|unique:etudiants',
+            'email' => 'email|required|unique:etudiants,email,'.$etudiant->id,
             'dob' => 'required|date|before:today',
             'ville_id' => 'required|exists:villes,id',
         ]);

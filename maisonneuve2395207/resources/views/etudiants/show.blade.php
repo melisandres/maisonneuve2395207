@@ -1,45 +1,46 @@
 @extends('layouts.layout')
 @section('content')
 
-    <div class="row">
+    <div class="row white-text">
         <div class="col-12 pt-2">
-            <a href="{{ route('etudiants.index')}}" class="btn btn-outline-primary">Retourner</a>
             <h4 class="display-6 mt-2">
                 {{ $etudiant->nom }}
             </h4>
             <hr>
-            <p>
-              <strong>adresse: </strong>{!! $etudiant->adresse !!}
-            </p>
-            <p>
-              <strong>email: </strong>{!! $etudiant->email !!}
-            </p>
-            <p>
-              <strong>date de naissance: </strong>{!! $etudiant->dob !!}
-            </p>
-            <p>
-              <strong>email: </strong>{!! $etudiant->email !!}
-            </p>
-            <p>
-              <strong>ville: </strong>{{ $etudiant->etudiantHasVille->nom }}
-            </p>
+            <div class="">
+              <p>
+                <strong>adresse: </strong>{!! $etudiant->adresse !!}
+              </p>
+              <p>
+                <strong>email: </strong>{!! $etudiant->email !!}
+              </p>
+              <p>
+                <strong>date de naissance: </strong>{!! $etudiant->dob !!}
+              </p>
+              <p>
+                <strong>ville: </strong>{{ $etudiant->etudiantHasVille->nom }}
+              </p>
+              <p>
+                  <strong>telephone: </strong> {{ $etudiant->phone }}
+              </p>
+            </div>
+            <div class="row mt-5">
+              <div class="col-3">
+                  <a href="{{ route('etudiants.edit', $etudiant->id)}}" class="btn simple">Modifier</a>
+              </div>
+              <div class="col-3">
+                <a href="{{ route('etudiants.index')}}" class="btn simple">Retourner</a>
+              </div>
+              <div class="col-3">
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn simple" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                      Effacer
+                      </button>
+              </div>
+          </div>
+        </div>
+    </div>
 
-            <p>
-                <strong>telephone: </strong> {{ $etudiant->phone }}
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <a href="{{ route('etudiants.edit', $etudiant->id)}}" class="btn simple">Modifier</a>
-        </div>
-        <div class="col-6">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn simple" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                Effacer
-                </button>
-        </div>
-    </div>
 
 
 
@@ -55,11 +56,11 @@
        Etes-vous sûr de vouloir efffacer la donnée?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+        <button type="button" class="btn simple" data-bs-dismiss="modal">Non</button>
         <form method="post">
             @csrf
             @method('delete')
-            <input type="submit" value="Effacer" class="btn btn-danger">
+            <input type="submit" value="Effacer" class="btn simple">
         </form>
       </div>
     </div>

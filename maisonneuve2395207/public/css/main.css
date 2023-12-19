@@ -1,24 +1,48 @@
+
 .blue{
     background-color: rgb(81, 81, 129);
+    background: linear-gradient (to left top, rgba(255, 255, 255, 0.5), transparent 50%), #B1B8BD;
 }
 
-.custom-link {
+.blue-txt{
     color: rgb(81, 81, 129);
-    text-decoration: none; /* Remove underline */
-    font-family: 'YourFont', sans-serif; /* Change font */
-    transition: color 0.3s; /* Add smooth color transition on hover */
 }
 
-.custom-link:hover {
+.custom-link, .nav-link.custom-link {
+    color: rgb(81, 81, 129);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.custom-link:hover, .nav-link.custom-link:hover {
     color: rgb(131, 131, 193);
 }
 
-button.btn.simple, a.btn.simple{
+button.btn.simple, a.btn.simple, input.btn.simple{
     background-color: aliceblue;
     border: 1px solid grey;
+    margin-right: 8px;
 }
 
-button.btn.simple:hover, a.btn.simple:hover{
+button.btn.simple:hover, a.btn.simple:hover, input.btn.simple:hover{
     background-color: rgb(83, 143, 196);
     border: 1px solid rgb(66, 64, 64);
 }
+
+.white-text{
+    color:white;
+    font-size: 18px;
+    font-weight: 100;
+    border-left: 0.5px solid rgba(255, 255, 255, 0.443);
+    padding-bottom: 30px;
+}
+
+.page-item.active .page-link {
+    color: white;
+    background-color: rgb(121, 121, 174);
+    border-color: rgb(124, 124, 165);
+  }
+  
+  .pagination > li > a, .pagination > li > span {
+    color: black;
+  }

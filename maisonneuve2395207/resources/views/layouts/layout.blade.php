@@ -16,10 +16,10 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link mx-4" href="{{ route('etudiants.index')}}">Les étudiants</a>
+                            <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.index')}}">Les étudiants</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-4" href="{{ route('etudiants.create')}}">Ajouter</a>
+                            <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.create')}}">Ajouter</a>
                         </li>
                     </ul>
                 </div>

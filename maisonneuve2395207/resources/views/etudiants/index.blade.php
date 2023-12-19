@@ -2,9 +2,9 @@
 @section('content')
 
     <div class="row justify-content-center">
-        <div class="col-12 col-md-6 ">
+        <div class="col-12 col-md-5 ">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-center">
                     <h4 class="">Nos étudiants</h4>
                 </div>
                 <div class="card-body">
@@ -17,8 +17,10 @@
                     </ul>
 
                 </div>
-                <div class="card-footer text-center pt-4">
+                <div class="card-footer text-center pt-4 ">
+                    <ul class="pagination justify-content-center">
                     {{ $etudiants->links() }}
+                    </ul>
                 </div>
             </div>
         </div>
