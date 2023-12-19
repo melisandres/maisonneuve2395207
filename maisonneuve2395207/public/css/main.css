@@ -1,0 +1,24 @@
+.blue{
+    background-color: rgb(81, 81, 129);
+}
+
+.custom-link {
+    color: rgb(81, 81, 129);
+    text-decoration: none; /* Remove underline */
+    font-family: 'YourFont', sans-serif; /* Change font */
+    transition: color 0.3s; /* Add smooth color transition on hover */
+}
+
+.custom-link:hover {
+    color: rgb(131, 131, 193);
+}
+
+button.btn.simple, a.btn.simple{
+    background-color: aliceblue;
+    border: 1px solid grey;
+}
+
+button.btn.simple:hover, a.btn.simple:hover{
+    background-color: rgb(83, 143, 196);
+    border: 1px solid rgb(66, 64, 64);
+}

@@ -31,11 +31,11 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <a href="{{ route('etudiants.edit', $etudiant->id)}}" class="btn btn-primary">Modifier</a>
+            <a href="{{ route('etudiants.edit', $etudiant->id)}}" class="btn simple">Modifier</a>
         </div>
         <div class="col-6">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <button type="button" class="btn simple" data-bs-toggle="modal" data-bs-target="#deleteModal">
                 Effacer
                 </button>
         </div>
@@ -52,7 +52,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       Etes-vous sûr de efffacer la donnée?
+       Etes-vous sûr de vouloir efffacer la donnée?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>

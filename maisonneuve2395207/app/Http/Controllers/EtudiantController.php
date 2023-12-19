@@ -15,7 +15,7 @@ class EtudiantController extends Controller
     public function index()
     {
         // select * from blog_posts; 
-        $etudiants = Etudiant::all();
+        $etudiants = Etudiant::orderBy('nom')->paginate(20);
        // return $blog;
        // return view('blog.index', ['blogs'=> $blogs]);
        return view('etudiants.index', compact('etudiants'));
@@ -36,6 +36,16 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nom' => 'min:2|max:45',
+            'adresse' => 'required|min:2|max:255',
+            'phone' => 'required|min:10|max:20',
+            'email' => 'email|required|unique:etudiants',
+            'dob' => 'required|date|before:today',
+            'ville_id' => 'required|exists:villes,id',
+        ]);
+
         //
         $newEtudiant = Etudiant::create([
             'nom' => $request->nom,
@@ -55,7 +65,7 @@ class EtudiantController extends Controller
      */
     public function show(Etudiant $etudiant)
     {
-        //
+        //try find by id etudian, city id... to fix the webdev issue...
         return view('etudiants.show', compact('etudiant'));
     }
 
@@ -74,6 +84,14 @@ class EtudiantController extends Controller
      */
     public function update(Request $request, Etudiant $etudiant)
     {
+        $request->validate([
+            'nom' => 'min:2|max:45',
+            'adresse' => 'required|min:2|max:255',
+            'phone' => 'required|min:10|max:20',
+            'email' => 'email|required|unique:etudiants',
+            'dob' => 'required|date|before:today',
+            'ville_id' => 'required|exists:villes,id',
+        ]);
         //
         $etudiant->update([
             'nom' => $request->nom,
