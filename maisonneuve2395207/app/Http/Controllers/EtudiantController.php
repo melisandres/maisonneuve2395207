@@ -6,6 +6,7 @@ use App\Models\Etudiant;
 use App\Models\Ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Password;
 
 class EtudiantController extends Controller
 {
@@ -38,12 +39,16 @@ class EtudiantController extends Controller
     {
 
         $request->validate([
-            'nom' => 'min:2|max:45',
+            'nom' => 'required|min:2|max:50',
             'adresse' => 'required|min:2|max:255',
             'phone' => 'required|min:10|max:20',
             'email' => 'email|required|unique:etudiants',
-            'dob' => 'required|date|before:today',
+            'dob' => 'required|date|date_format:Y-m-d|before:today',
+            'unite' => 'numeric|decimal:2|gt:0',
             'ville_id' => 'required|exists:villes,id',
+            'password' => ['required', Password::min(2)->letters()->numbers()->mixedCase(), 'max:20'],
+            /* 'password' => 'required|min:2|max:20|mixedCase|letters|numbers', */
+            'confirmation-password' => 'required|same:password'
         ]);
 
         //
@@ -85,7 +90,7 @@ class EtudiantController extends Controller
     public function update(Request $request, Etudiant $etudiant)
     {
         $request->validate([
-            'nom' => 'min:2|max:45',
+            'nom' => 'required|min:2|max:50',
             'adresse' => 'required|min:2|max:255',
             'phone' => 'required|min:10|max:20',
             'email' => 'email|required|unique:etudiants,email,'.$etudiant->id,

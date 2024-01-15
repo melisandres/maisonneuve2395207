@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <div class="control-group col-12 mt-3">
                             <label for="nom">Nom</label>
-                            <input type="text" id="nom" name="nom" class="form-control" value="{{ old('nom') }}">
+                            <input type="text" id="nom" name="nom" maxlength="50" minlength="2" class="form-control" value="{{ old('nom') }}">
                             @error('nom')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -33,7 +33,7 @@
                         <div class="control-group col-12 mt-3">
                             <label for="ville_id">Ville</label>
                             <select id="ville_id" name="ville_id" class="form-control">
-                                <option value="" {{ old('ville_id') ? '' : 'selected' }}>selectionez une ville</option>
+                                <option value=" {{ old('ville_id') ? '' : 'selected' }}">selectionez une ville</option>
                                 @foreach($villes as $ville)
                                     <option value="{{ $ville->id }}" {{ old('ville_id') == $ville->id ? 'selected' : '' }}>{{ $ville->nom }}</option>
                                 @endforeach
@@ -53,12 +53,27 @@
 
                          <div class="control-group col-12 mt-3">
                             <label for="dob">date de naissance:</label>
-                            <input type="date" id="dob" name="dob" class="form-control" value="{{ old('dob') }}">
+                            <input id="dob" name="dob" class="form-control" value="{{ old('dob') }}" placeholder="dd-mm-yyyy" >
                             @error('dob')
                                 <span class="text-danger mt-8">{{ $message }}</span>
                             @enderror
                         </div>
-                        
+
+                        <div class="control-group col-12 mt-3">
+                            <label for="password">password:</label>
+                            <input type="password" id="password" name="password">
+                            @error('password')
+                                <span class="text-danger mt-8">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="control-group col-12 mt-3">
+                            <label for="confirmation-password">confirm password:</label>
+                            <input type="password" id="confirmation-password" name="confirmation-password">
+                            @error('confirmation-password')
+                                <span class="text-danger mt-8">{{ $message }}</span>
+                            @enderror
+                        </div> 
 
                     </div>
                     <div class="card-footer text-center d-grid">
