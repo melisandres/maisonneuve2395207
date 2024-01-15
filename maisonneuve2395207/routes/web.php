@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\CustomAuthController ;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-
+//etudiants routes
 Route::get('/etudiants', [EtudiantController::class, 'index'])->name('etudiants.index');
 Route::get('/etudiant/{etudiant}', [EtudiantController::class, 'show'])->name('etudiants.show');
 Route::get('/etudiant-create', [EtudiantController::class, 'create'])->name('etudiants.create');
@@ -28,4 +27,12 @@ Route::post('/etudiant-create', [EtudiantController::class, 'store'])->name('etu
 Route::get('/etudiant-edit/{etudiant}', [EtudiantController::class, 'edit'])->name('etudiants.edit');
 Route::put('/etudiant-edit/{etudiant}', [EtudiantController::class, 'update'])->name('etudiants.edit');
 Route::delete('/etudiant/{etudiant}', [EtudiantController::class, 'destroy'])->name('etudiants.delete');
+
+//authentication routes
+Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('/login', [CustomAuthController::class, 'authentication'])->name('login.authentication');
+Route::get('/registration', [CustomAuthController::class, 'create'])->name('user.registration');
+Route::post('/registration-store', [CustomAuthController::class, 'store'])->name('user.store');
+
+//example test -- to be deleted
 Route::get('/query', [EtudiantController::class, 'query']);

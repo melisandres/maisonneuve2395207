@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Etudiant;
 use App\Models\Ville;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Password;
@@ -16,7 +17,11 @@ class EtudiantController extends Controller
     public function index()
     {
         // select * from blog_posts; 
-        $etudiants = Etudiant::orderBy('nom')->paginate(20);
+        /* $etudiants = Etudiant::orderBy('nom')->paginate(20); */
+
+        $etudiants = Etudiant::join('users', 'users.id', '=', 'etudiants.user_id')
+                     ->orderBy('users.name')
+                     ->paginate(20);
        // return $blog;
        // return view('blog.index', ['blogs'=> $blogs]);
        return view('etudiants.index', compact('etudiants'));
@@ -72,6 +77,15 @@ class EtudiantController extends Controller
     {
         //try find by id etudian, city id... to fix the webdev issue...
         return view('etudiants.show', compact('etudiant'));
+
+/*         // Find the etudiant by id
+        $etudiant = Etudiant::findOrFail($id);
+
+        // Find the user by user_id
+        $user = User::findOrFail($etudiant->user_id);
+
+        // Pass the etudiant and user models to the view
+        return view('etudiants.show', compact('etudiant', 'user')); */
     }
 
     /**

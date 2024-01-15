@@ -8,11 +8,14 @@
             </h4>
             <hr>
             <div class="">
+              <h3>
+              {!! optional($etudiant->hasUser)->name !!}
+              </h3>
               <p>
                 <strong>adresse: </strong>{!! $etudiant->adresse !!}
               </p>
               <p>
-                <strong>email: </strong>{!! $etudiant->email !!}
+                <strong>email: </strong>{!! optional($etudiant->hasUser)->email !!}
               </p>
               <p>
                 <strong>date de naissance: </strong>{!! $etudiant->dob !!}

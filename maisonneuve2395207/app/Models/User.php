@@ -23,6 +23,12 @@ class User extends Authenticatable
         'password',
     ];
 
+    // Get the etudiant associated with the user
+    public function hasEtudiant()
+    {
+        return $this->hasOne('App\Models\Etudiant', 'user_id', 'id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
