@@ -71,6 +71,40 @@ class CustomAuthController extends Controller
         //return redirect(route('login'))->withSuccess('User enregistré');
     }
 
+    public function authentication(Request $request){
+        $request->validate([
+        /* or is it exists:users.email */
+        'email' => 'required|email|exists:users',
+        'password' => 'required|min:6|max:20'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        if(!Auth::validate($credentials)):
+            return redirect(route('login'))->withErrors(trans('auth.password'))->withInput();
+        endif;
+
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+
+        Auth::login($user);
+
+        return redirect()->intended(route('dashboard'));
+    }
+
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect(route('login'));
+    }
+
+    public function dashboard(){
+
+        $name = 'Guest';
+        if(Auth::check()){
+        $name = Auth::user()->name;
+        }
+        return view('forum.dashboard', ['name' =>$name]);
+    }
+
     /**
      * Display the specified resource.
      */

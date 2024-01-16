@@ -33,6 +33,11 @@ Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('/login', [CustomAuthController::class, 'authentication'])->name('login.authentication');
 Route::get('/registration', [CustomAuthController::class, 'create'])->name('user.registration');
 Route::post('/registration-store', [CustomAuthController::class, 'store'])->name('user.store');
+Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
+
+//dashboard
+Route::get('/dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
+
 
 //example test -- to be deleted
 Route::get('/query', [EtudiantController::class, 'query']);

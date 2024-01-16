@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Auth;
 
 class EtudiantController extends Controller
 {
@@ -16,12 +17,19 @@ class EtudiantController extends Controller
      */
     public function index()
     {
+        if(Auth::check()){
+            $etudiants = Etudiant::join('users', 'users.id', '=', 'etudiants.user_id')
+            ->orderBy('users.name')
+            ->paginate(20);
+
+            return view('etudiants.index', compact('etudiants'));
+            }
+            return redirect(route('login'))->withErrors('Vous n\'
+           êtes pas autorisé à accéder');
         // select * from blog_posts; 
         /* $etudiants = Etudiant::orderBy('nom')->paginate(20); */
 
-        $etudiants = Etudiant::join('users', 'users.id', '=', 'etudiants.user_id')
-                     ->orderBy('users.name')
-                     ->paginate(20);
+
        // return $blog;
        // return view('blog.index', ['blogs'=> $blogs]);
        return view('etudiants.index', compact('etudiants'));

@@ -14,6 +14,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
+                    <a class="navbar-brand" href="#">Hello @isset($name) {{ $name }} @endisset</a>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.index')}}">Les étudiants</a>
@@ -21,6 +22,21 @@
                         <li class="nav-item">
                             <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.create')}}">Ajouter</a>
                         </li>
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link mx-4 custom-link" href="{{ route('user.registration') }}">Registration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-4 custom-link" href="{{route('login')}}">Login</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.index') }}">Étudiants</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-4 custom-link" href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
