@@ -46,3 +46,7 @@ button.btn.simple:hover, a.btn.simple:hover, input.btn.simple:hover{
   .pagination > li > a, .pagination > li > span {
     color: black;
   }
+
+  .custom-textarea {
+    height: 400px;
+}

@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <form action="{{ route('authentication') }}" method="post">
+                <form action="{{ route('login.authentication') }}" method="post">
                     @csrf
                     <div class="card-header display-6 text-center">
                             Login

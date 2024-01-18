@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EtudiantController;
-use App\Http\Controllers\CustomAuthController ;
+use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,17 @@ Route::get('/etudiant/{etudiant}', [EtudiantController::class, 'show'])->name('e
 Route::get('/etudiant-create', [EtudiantController::class, 'create'])->name('etudiants.create');
 Route::post('/etudiant-create', [EtudiantController::class, 'store'])->name('etudiants.store');
 Route::get('/etudiant-edit/{etudiant}', [EtudiantController::class, 'edit'])->name('etudiants.edit');
-Route::put('/etudiant-edit/{etudiant}', [EtudiantController::class, 'update'])->name('etudiants.edit');
+Route::put('/etudiant-edit/{etudiant}', [EtudiantController::class, 'update'])->name('etudiants.update');
 Route::delete('/etudiant/{etudiant}', [EtudiantController::class, 'destroy'])->name('etudiants.delete');
+
+//articles routes
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/article/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/article-create', [ArticleController::class, 'create'])->name('articles.create');
+Route::post('/article-create', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/article-edit/{article}', [ArticleController::class, 'edit'])->name('articles.edit');
+Route::put('/article-edit/{article}', [ArticleController::class, 'update'])->name('articles.update');
+Route::delete('/article/{article}', [ArticleController::class, 'destroy'])->name('articles.delete');
 
 //authentication routes
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login');
@@ -34,6 +44,10 @@ Route::post('/login', [CustomAuthController::class, 'authentication'])->name('lo
 Route::get('/registration', [CustomAuthController::class, 'create'])->name('user.registration');
 Route::post('/registration-store', [CustomAuthController::class, 'store'])->name('user.store');
 Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
+Route::get('/user-edit/{user}', [CustomAuthController::class, 'edit'])->name('user.edit');
+Route::put('/user-edit/{user}', [CustomAuthController::class, 'update'])->name('user.update');
+Route::delete('/user-delete/{user}', [CustomAuthController::class, 'destroy'])->name('user.delete');
+
 
 //dashboard
 Route::get('/dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');

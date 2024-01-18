@@ -17,12 +17,13 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-            $etudiants = Etudiant::join('users', 'users.id', '=', 'etudiants.user_id')
-            ->orderBy('users.name')
-            ->paginate(20);
+        $etudiants = Etudiant::join('users', 'users.id', '=', 'etudiants.user_id')
+        ->orderBy('users.name')
+        ->paginate(20);
 
-            return view('etudiants.index', compact('etudiants'));
+        return view('etudiants.index', compact('etudiants'));
+        if(Auth::check()){
+
             }
             return redirect(route('login'))->withErrors('Vous n\'
            êtes pas autorisé à accéder');
@@ -40,9 +41,8 @@ class EtudiantController extends Controller
      */
     public function create()
     {
-        //
-        $villes = Ville::all();
-        return view('etudiants.create', compact('villes'));
+        //we will create etudiants from the 
+        //CustomAuthController--as we create users
     }
 
     /**
@@ -50,8 +50,10 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
+        //a new student is stored via the 
+        //CustomAuthController--as we create users
 
-        $request->validate([
+        /* $request->validate([
             'nom' => 'required|min:2|max:50',
             'adresse' => 'required|min:2|max:255',
             'phone' => 'required|min:10|max:20',
@@ -60,7 +62,6 @@ class EtudiantController extends Controller
             'unite' => 'numeric|decimal:2|gt:0',
             'ville_id' => 'required|exists:villes,id',
             'password' => ['required', Password::min(2)->letters()->numbers()->mixedCase(), 'max:20'],
-            /* 'password' => 'required|min:2|max:20|mixedCase|letters|numbers', */
             'confirmation-password' => 'required|same:password'
         ]);
 
@@ -74,8 +75,8 @@ class EtudiantController extends Controller
             'ville_id' => $request->ville_id,
         ]);
 
-        //return $newBlog;
-        return redirect(route('etudiants.show', $newEtudiant->id))->withSuccess('Etudiant enregistré!');
+        //return to a view of all the students;
+        return redirect(route('etudiants.show', $newEtudiant->id))->withSuccess('Etudiant enregistré!'); */
     }
 
     /**
@@ -83,8 +84,9 @@ class EtudiantController extends Controller
      */
     public function show(Etudiant $etudiant)
     {
+        $user = $etudiant->hasUser;
         //try find by id etudian, city id... to fix the webdev issue...
-        return view('etudiants.show', compact('etudiant'));
+        return view('etudiants.show', compact('etudiant', 'user'));
 
 /*         // Find the etudiant by id
         $etudiant = Etudiant::findOrFail($id);
@@ -101,9 +103,8 @@ class EtudiantController extends Controller
      */
     public function edit(Etudiant $etudiant)
     {
-        //
-        $villes = Ville::all();
-        return view('etudiants.edit', compact('etudiant', 'villes'));
+        //a new student is stored via the 
+        //CustomAuthController--as we create users
     }
 
     /**

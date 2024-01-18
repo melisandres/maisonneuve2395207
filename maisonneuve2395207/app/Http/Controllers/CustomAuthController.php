@@ -43,7 +43,6 @@ class CustomAuthController extends Controller
             'dob' => 'required|date|date_format:Y-m-d|before:today',
             'ville_id' => 'required|exists:villes,id',
             'password' => ['required', Password::min(2)->letters()->numbers()->mixedCase(), 'max:20'],
-            /* 'password' => 'required|min:2|max:20|mixedCase|letters|numbers', */
             'confirmation-password' => 'required|same:password'
         ]);
 
@@ -64,8 +63,10 @@ class CustomAuthController extends Controller
         // Create a new etudiant and associate it with the user
         $user->hasEtudiant()->save($newEtudiant);
 
-        //return $newEtudiant;
+        //return a view of the new etudiant;
         return redirect(route('etudiants.show', $newEtudiant->id))->withSuccess('Etudiant enregistré!');
+
+        //or return to the login page? 
 
         // return redirect()->back()->withSuccess('User enregistré');
         //return redirect(route('login'))->withSuccess('User enregistré');
@@ -118,7 +119,12 @@ class CustomAuthController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        if (Auth::check() && $user->id === Auth::id()) {
+            //test if this works  
+        }
+        $villes = Ville::all();
+        $etudiant = $user->hasEtudiant;
+        return view('Auth.edit', compact('etudiant', 'villes', 'user'));
     }
 
     /**
@@ -126,7 +132,32 @@ class CustomAuthController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // Validate the incoming request data for the update
+        $request->validate([
+            'name' => 'required|min:2|max:50',
+            'adresse' => 'required|min:2|max:255',
+            'phone' => 'required|min:10|max:20',
+            'email' => "email|required|unique:users,email,$user->id",
+            'dob' => 'required|date|date_format:Y-m-d|before:today',
+            'ville_id' => 'required|exists:villes,id',
+        ]);
+
+        // Update the user data
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // Update the associated etudiant data
+        $user->hasEtudiant->update([
+            'adresse' => $request->adresse,
+            'phone' => $request->phone,
+            'dob' => $request->dob,
+            'ville_id' => $request->ville_id,
+        ]);
+
+        // Redirect to a view or route of your choice
+        return redirect(route('etudiants.show', $user->hasEtudiant->id))->withSuccess('Etudiant mis à jour!');
     }
 
     /**
@@ -134,6 +165,15 @@ class CustomAuthController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        // Delete the associated student
+        $user->hasEtudiant()->delete();
+
+        // Delete the user
+        $user->delete();
+
+        //you have to log them out!
+        Auth::logout();
+        return redirect(route('dashboard'))->withSuccess('You have successfully been deleted from our databases!');
+
     }
 }

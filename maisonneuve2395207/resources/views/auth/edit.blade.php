@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-md-8 col-lg-6">
                 <div class="card">
                     <h3 class="card-header text-center">
-                        Enregistrer
+                        Modify Student
                     </h3>
                     <div class="card-body">
                         @if(session('success'))
@@ -14,11 +14,13 @@
                                 {{session('success')}}
                             </div>
                         @endif
-                        <form action="{{route('user.store')}}" method="post">
+
+                        <form action="{{ route('user.update', $user->id) }}" method="post">
                             @csrf
+                            @method('PUT')
 
                             <div class="form-group mb-3">
-                                <input type="text" placeholder="Name" class="form-control"name="name" value="{{old('name')}}">
+                                <input type="text" placeholder="Name" class="form-control"name="name" value="{{ old('name', $user->name) }}">
                                     @if ($errors->has('name'))
                                         <div class="text-danger mt-2">
                                             {{$errors->first('name')}}
@@ -27,7 +29,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="email" placeholder="Email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input type="email" placeholder="Email" class="form-control" name="email" value="{{ old('email', $user->email) }}">
                                 @if ($errors->has('email'))
                                     <div class="text-danger mt-2">
                                         {{$errors->first('email')}}
@@ -36,7 +38,7 @@
                             </div>
 
                             <div class="control-group col-12 mt-3">
-                                <input placeholder="Adresse" id="adresse" name="adresse" class="form-control" value="{{ old('adresse') }}">
+                                <input placeholder="Adresse" id="adresse" name="adresse" class="form-control" value="{{ old('adresse', $etudiant->adresse) }}">
                                 @error('adresse')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -44,9 +46,12 @@
 
                             <div class="control-group col-12 mt-3">
                                 <select id="ville_id" name="ville_id" class="form-control">
-                                    <option value=" {{ old('ville_id') ? '' : 'selected' }}">selectionez une ville</option>
+                                    <option value="">Sélectionnez une ville</option>
                                     @foreach($villes as $ville)
-                                        <option value="{{ $ville->id }}" {{ old('ville_id') == $ville->id ? 'selected' : '' }}>{{ $ville->nom }}</option>
+                                        <option value="{{ $ville->id }}"
+                                        {{ old('ville_id', $etudiant->ville_id) == $ville->id ? 'selected' : '' }}>
+                                        {{ $ville->nom }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('ville_id')
@@ -55,7 +60,7 @@
                             </div>
 
                             <div class="control-group col-12 mt-3">
-                                <input placeholder="Telephone" id="phone" name="phone" class="form-control" value="{{ old('phone') }}">
+                                <input placeholder="Telephone" id="phone" name="phone" class="form-control" value="{{ old('phone', $etudiant->phone) }}">
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -65,31 +70,15 @@
 
                             <div class="control-group col-12 mt-3">
                                 <label for="dob">date de naissance:</label>
-                                <input id="dob" name="dob" class="form-control" value="{{ old('dob') }}" placeholder="yyyy-mm-dd" >
+                                <input id="dob" name="dob" class="form-control" value="{{ old('dob', $etudiant->dob) }}" placeholder="yyyy-mm-dd" >
                                 @error('dob')
-                                    <span class="text-danger mt-8">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="control-group col-12 mt-3">
-                                <label for="password">password:</label>
-                                <input class="form-control" type="password" id="password" name="password">
-                                @error('password')
-                                    <span class="text-danger mt-8">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="control-group col-12 mt-3">
-                                <label for="confirmation-password">confirm password:</label>
-                                <input  class="form-control" type="password" id="confirmation-password" name="confirmation-password">
-                                @error('confirmation-password')
                                     <span class="text-danger mt-8">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="card-footer text-center d-grid">
-                            <input type="submit" value="Sauvegarder" class="btn simple block btn-block">
+                            <input type="submit" value="Modify" class="btn simple block btn-block">
                         </div>
 
                     </form>

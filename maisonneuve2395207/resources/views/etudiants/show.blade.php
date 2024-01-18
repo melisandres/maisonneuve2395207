@@ -29,16 +29,16 @@
             </div>
             <div class="row mt-5">
               <div class="col-3">
-                  <a href="{{ route('etudiants.edit', $etudiant->id)}}" class="btn simple">Modifier</a>
+                  <a href="{{ route('user.edit', $etudiant->id)}}" class="btn simple">Modifier</a>
               </div>
               <div class="col-3">
                 <a href="{{ route('etudiants.index')}}" class="btn simple">Retourner</a>
               </div>
               <div class="col-3">
-                      <!-- Button trigger modal -->
-                      <button type="button" class="btn simple" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                      Effacer
-                      </button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn simple" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Effacer
+                </button>
               </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn simple" data-bs-dismiss="modal">Non</button>
-        <form method="post">
+        <form method="post" action="{{ route('user.delete', $user) }}">
             @csrf
             @method('delete')
             <input type="submit" value="Effacer" class="btn simple">

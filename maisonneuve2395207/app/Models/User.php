@@ -23,6 +23,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     // Get the etudiant associated with the user
     public function hasEtudiant()
     {
