@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\UploadsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,12 @@ Route::get('/logout', [CustomAuthController::class, 'logout'])->name('logout');
 Route::get('/user-edit/{user}', [CustomAuthController::class, 'edit'])->name('user.edit');
 Route::put('/user-edit/{user}', [CustomAuthController::class, 'update'])->name('user.update');
 Route::delete('/user-delete/{user}', [CustomAuthController::class, 'destroy'])->name('user.delete');
+
+//uploads routes
+Route::get('/uploads', [UploadsController::class, 'index'])->name('uploads.index');
+Route::get('/upload-file', [UploadsController::class, 'create'])->name('upload.create');
+Route::post('/upload-file', [UploadsController::class, 'store'])->name('upload.store');
+Route::get('/download/{filename}', [UploadsController::class,'download'])->name('uploads.download');
 
 
 //dashboard

@@ -14,6 +14,8 @@ class ArticleController extends Controller
     public function index()
     {
         if(Auth::check()){
+            //TODO: consider using 'hasUser' here, since its the same
+            //code. Just test it. to make sure.
             $articles = Article::with('user')->get();
             //add an order to these?
             return view('articles.index', compact('articles'));

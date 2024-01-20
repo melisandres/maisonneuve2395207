@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\User;
+use App\Models\Article;
+
+class ArticlePolicy
+{
+    /**
+     * Create a new policy instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    //make sure the user currently logged in has same id as
+    //the author of the article, befor showing the edit button
+    //in the view
+    public function update(User $user, Article $article)
+    {
+        return $user->id === $article->user_id;
+    }
+}
