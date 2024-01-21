@@ -82,20 +82,14 @@ class EtudiantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Etudiant $etudiant)
+    public function show($user_id)
     {
-        $user = $etudiant->hasUser;
-        //try find by id etudian, city id... to fix the webdev issue...
-        return view('etudiants.show', compact('etudiant', 'user'));
-
-/*         // Find the etudiant by id
-        $etudiant = Etudiant::findOrFail($id);
-
-        // Find the user by user_id
-        $user = User::findOrFail($etudiant->user_id);
-
-        // Pass the etudiant and user models to the view
+/*         $user = $etudiant->hasUser;
         return view('etudiants.show', compact('etudiant', 'user')); */
+        $etudiant = Etudiant::where('user_id', $user_id)->firstOrFail();
+        $user = $etudiant->hasUser;
+    
+        return view('etudiants.show', compact('etudiant', 'user'));
     }
 
     /**

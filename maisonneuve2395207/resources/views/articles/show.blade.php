@@ -48,7 +48,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
         <form method="post">
             @csrf
-            @method('delete')
+            @method('DELETE')
             <input type="submit" value="Effacer" class="btn btn-danger">
         </form>
       </div>

@@ -36,6 +36,9 @@
                                 <a class="nav-link mx-4 custom-link" href="{{ route('articles.index') }}">Articles</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link mx-4 custom-link" href="{{route('uploads.index')}}">Files</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link mx-4 custom-link" href="{{ route('logout') }}">Logout</a>
                             </li>
                         @endguest

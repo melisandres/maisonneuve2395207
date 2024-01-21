@@ -5,6 +5,7 @@ use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UploadsController;
+use App\Models\Uploads;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/', function () {
 
 //etudiants routes
 Route::get('/etudiants', [EtudiantController::class, 'index'])->name('etudiants.index');
-Route::get('/etudiant/{etudiant}', [EtudiantController::class, 'show'])->name('etudiants.show');
+Route::get('/etudiant/{user_id}', [EtudiantController::class, 'show'])->name('etudiants.show');
 Route::get('/etudiant-create', [EtudiantController::class, 'create'])->name('etudiants.create');
 Route::post('/etudiant-create', [EtudiantController::class, 'store'])->name('etudiants.store');
 Route::get('/etudiant-edit/{etudiant}', [EtudiantController::class, 'edit'])->name('etudiants.edit');
@@ -54,6 +55,9 @@ Route::get('/uploads', [UploadsController::class, 'index'])->name('uploads.index
 Route::get('/upload-file', [UploadsController::class, 'create'])->name('upload.create');
 Route::post('/upload-file', [UploadsController::class, 'store'])->name('upload.store');
 Route::get('/download/{filename}', [UploadsController::class,'download'])->name('uploads.download');
+Route::get('/upload-edit/{upload}', [UploadsController::class, 'edit'])->name('upload.edit');
+Route::put('/upload-edit/{upload}', [UploadsController::class, 'update'])->name('upload.update');
+Route::delete('/upload-delete/{uploads}', [UploadsController::class, 'destroy'])->name('upload.delete');
 
 
 //dashboard

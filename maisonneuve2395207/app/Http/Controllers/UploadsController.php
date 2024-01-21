@@ -39,19 +39,16 @@ class UploadsController extends Controller
     {
         $request->validate([
             'file' => 'required|file|mimes:pdf,zip,doc,jpg,jpeg',
+            'title' => 'required|min:2|max:255',
+            'title_fr' => ' min:2|max:255',
         ]);
 
         //retrieve file, and concatenate the date and the original filename
         $file = $request->file('file');
         $fileName = time() . '_' . $file->getClientOriginalName();
 
-        // Save file to storage/app/uploads
-        //Storage::putFileAs('uploads', $file, $fileName);
 
         // Save file to storage/app/public/uploads
-        /* Storage::disk('uploads')->putFileAs('uploads', $file, $fileName); */
-
-          // Save file to storage/app/public/uploads
         Storage::disk('uploads')->putFileAs('', $file, $fileName);
 
 
@@ -67,7 +64,7 @@ class UploadsController extends Controller
             'file_path' => $fileName
         ]);
 
-        return redirect()->back()->withSuccess('File uploaded successfully.');
+        return redirect()->route('uploads.index')->withSuccess('File uploaded successfully.');
     }
 
     /**
@@ -81,17 +78,67 @@ class UploadsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Uploads $uploads)
+    public function edit(Uploads $upload)
     {
-        //
+        if(Auth::check()){
+            // Get the authenticated user's ID
+            $authenticatedUserId = Auth::user()->id;
+
+            // Check if the authenticated user's ID matches the upload's user_id
+            if ($authenticatedUserId == $upload->user_id) {
+                $user = $upload->hasUser;
+                //try find by id etudian, city id... to fix the webdev issue...
+                return view('uploads.edit', compact('upload', 'user'));
+
+            } else {
+                // Authenticated user does not have access to the upload
+                return redirect()->route('uploads.index')->withErrors('Vous n\'êtes pas autorisé à modifier ce document.');
+            }
+        } else {
+            // User is not authenticated
+            return redirect(route('login'))->withErrors('Vous n\'êtes pas autorisé à accéder a cette fonctionalité.');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Uploads $uploads)
+    public function update(Request $request, Uploads $upload)
     {
-        //
+        $request->validate([
+            'file' => 'file|mimes:pdf,zip,doc,jpg,jpeg',
+            'title' => 'required|min:2|max:255',
+            'title_fr' => ' min:2|max:255',
+        ]);
+
+            // Check if a new file is provided
+        if ($request->hasFile('file')) {
+            // Delete the previous file
+            Storage::disk('uploads')->delete($upload->file_path);
+
+            // Retrieve the new file and concatenate the date and the original filename
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            // Save the new file to storage/app/public/uploads
+            Storage::disk('uploads')->putFileAs('', $file, $fileName);
+
+            // Update the file_path in the database
+            $upload->update(['file_path' => $fileName]);
+
+            //retrieve file, and concatenate the date and the original filename
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+        }
+
+        
+        // Update other fields in the database
+        $upload->update([
+            'title' => $request->title,
+            'title_fr' => $request->title_fr,
+        ]);
+
+        return redirect()->route('uploads.index')->withSuccess('File updated successfully.');
     }
 
     /**
@@ -99,7 +146,17 @@ class UploadsController extends Controller
      */
     public function destroy(Uploads $uploads)
     {
-        //
+
+       // Get the file path before deleting the record
+        $filePath = $uploads->file_path;
+
+        // Delete the record from the database
+        $uploads->delete();
+
+        // Delete the file from storage
+        Storage::disk('uploads')->delete($filePath);
+
+        return redirect(route('uploads.index'))->withSuccess('File deleted!');
     }
 
     public function download($filename)

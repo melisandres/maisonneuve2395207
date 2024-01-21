@@ -16,9 +16,14 @@ class Etudiant extends Model
     }
 
     // Get the user that owns the etudiant
-    public function hasUser()
+/*     public function hasUser()
     {
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    } */
+
+    public function hasUser()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     //many articles can be written by one etudiant
