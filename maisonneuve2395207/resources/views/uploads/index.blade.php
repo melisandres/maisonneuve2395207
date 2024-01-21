@@ -61,6 +61,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{ $uploads->links() }}
+                    </div>
                 </div>
             </div>
         </div>

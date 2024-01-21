@@ -165,15 +165,20 @@ class CustomAuthController extends Controller
      */
     public function destroy(User $user)
     {
-        // Delete the associated student
-        $user->hasEtudiant()->delete();
+        if (Auth::check() && $user->id === Auth::id()) {
 
-        // Delete the user
-        $user->delete();
+            // Delete the associated student
+            $user->hasEtudiant()->delete();
 
-        //you have to log them out!
-        Auth::logout();
-        return redirect(route('dashboard'))->withSuccess('You have successfully been deleted from our databases!');
+            // Delete the user
+            $user->delete();
+
+            //you have to log them out!
+            Auth::logout();
+            return redirect(route('dashboard'))->withSuccess('You have successfully been deleted from our databases!');
+        }else{
+            return redirect()->back()->withErrors('Cannot delete another student');
+        }
 
     }
 }

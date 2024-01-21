@@ -26,6 +26,9 @@
                         @endforelse
                     </ul>
                 </div>
+                <div class="card-footer pagination">
+                    {{ $articles->links() }}
+                </div>
             </div>
         </div>
     </div>

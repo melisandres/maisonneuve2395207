@@ -15,7 +15,7 @@ class UploadsController extends Controller
     public function index()
     {
         if(Auth::check()){
-            $uploads = Uploads::with('hasUser')->get();
+            $uploads = Uploads::with('hasUser')->paginate(10);
             //add an order to these?
             return view('uploads.index', compact('uploads'));
         }else{

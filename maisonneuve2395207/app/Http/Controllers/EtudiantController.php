@@ -132,10 +132,10 @@ class EtudiantController extends Controller
      */
     public function destroy(Etudiant $etudiant)
     {
-        //
+/*         //
         $etudiant->delete();
 
-        return redirect(route('etudiants.index'))->withSuccess('Etudiant effacé!');
+        return redirect(route('etudiants.index'))->withSuccess('Etudiant effacé!'); */
     }
 
     public function query(){
