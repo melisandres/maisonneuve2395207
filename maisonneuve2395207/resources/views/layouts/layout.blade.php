@@ -10,6 +10,7 @@
     <body class="blue"> 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
+                @php $locale = session()->get('locale') @endphp
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,6 +43,8 @@
                                 <a class="nav-link mx-4 custom-link" href="{{ route('logout') }}">Logout</a>
                             </li>
                         @endguest
+                        <a class="nav-link @if($locale=='fr') bg-info @endif" href="{{route('lang', 'fr')}}">fr<i class=""></i></a>
+                        <a class="nav-link  @if($locale=='en') bg-info @endif" href="{{route('lang', 'en')}}">en<i class=""></i></a>
                     </ul>
                 </div>
             </div>

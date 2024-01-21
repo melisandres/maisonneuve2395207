@@ -5,6 +5,7 @@ use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UploadsController;
+use App\Http\Controllers\LocalizationController;
 use App\Models\Uploads;
 
 /*
@@ -63,6 +64,8 @@ Route::delete('/upload-delete/{uploads}', [UploadsController::class, 'destroy'])
 //dashboard
 Route::get('/dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 
+//route for language
+Route::get('/lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
 
 //example test -- to be deleted
 Route::get('/query', [EtudiantController::class, 'query']);
