@@ -15,37 +15,41 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    @auth
-                        <a class="navbar-brand" href="#">Hello {{ auth()->user()->name }}</a>
+<!--                     @auth
+                        <a class="navbar-brand" href="#">@lang('lang.text_hello') {{ auth()->user()->name }}</a>
                     @else
-                        <a class="navbar-brand" href="#">Hello Guest</a>
-                    @endauth
+                        <a class="navbar-brand" href="#">@lang('lang.text_hello') Guest</a>
+                    @endauth -->
                     <ul class="navbar-nav">
 
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link mx-4 custom-link" href="{{ route('user.registration') }}">Registration</a>
+                                <a class="nav-link mx-4 custom-link" href="{{ route('user.registration') }}">@lang('lang.text_registration')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-4 custom-link" href="{{route('login')}}">Login</a>
+                                <a class="nav-link mx-4 custom-link" href="{{route('login')}}">@lang('lang.text_login')</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.index') }}">Étudiants</a>
+                                <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.index') }}">@lang('lang.text_students')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-4 custom-link" href="{{ route('articles.index') }}">Articles</a>
+                                <a class="nav-link mx-4 custom-link" href="{{ route('articles.index') }}">@lang('lang.text_articles')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-4 custom-link" href="{{route('uploads.index')}}">Files</a>
+                                <a class="nav-link mx-4 custom-link" href="{{route('uploads.index')}}">@lang('lang.text_files')</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mx-4 custom-link" href="{{ route('logout') }}">Logout</a>
                             </li>
                         @endguest
-                        <a class="nav-link @if($locale=='fr') bg-info @endif" href="{{route('lang', 'fr')}}">fr<i class=""></i></a>
-                        <a class="nav-link  @if($locale=='en') bg-info @endif" href="{{route('lang', 'en')}}">en<i class=""></i></a>
-                    </ul>
+                        <li class="nav-item">
+                            <a class="nav-link mx-4 custom-link @if ($locale=='fr') bg-info @endif" href="{{route('lang', 'fr')}}">fr<i class=""></i></a>
+                        </li>
+                        <li>
+                            <a class="nav-link mx-4 custom-link  @if($locale=='en') bg-info @endif" href="{{route('lang', 'en')}}">en<i class=""></i></a>
+                        </li>
+                    </ul>   
                 </div>
             </div>
         </nav>

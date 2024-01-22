@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-md-8 col-lg-6">
                 <div class="card">
                     <h3 class="card-header text-center">
-                        Enregistrer
+                        @lang('lang.registration_create_heading')
                     </h3>
                     <div class="card-body">
                         @if(session('success'))
@@ -18,7 +18,7 @@
                             @csrf
 
                             <div class="form-group mb-3">
-                                <input type="text" placeholder="Name" class="form-control"name="name" value="{{old('name')}}">
+                                <input type="text" placeholder="@lang('lang.text_name')" class="form-control"name="name" value="{{old('name')}}">
                                     @if ($errors->has('name'))
                                         <div class="text-danger mt-2">
                                             {{$errors->first('name')}}
@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="email" placeholder="Email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input type="email" placeholder="@lang('lang.text_email')" class="form-control" name="email" value="{{ old('email') }}">
                                 @if ($errors->has('email'))
                                     <div class="text-danger mt-2">
                                         {{$errors->first('email')}}
@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="control-group col-12 mt-3">
-                                <input placeholder="Adresse" id="adresse" name="adresse" class="form-control" value="{{ old('adresse') }}">
+                                <input placeholder="@lang('lang.text_address')" id="adresse" name="adresse" class="form-control" value="{{ old('adresse') }}">
                                 @error('adresse')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -44,7 +44,7 @@
 
                             <div class="control-group col-12 mt-3">
                                 <select id="ville_id" name="ville_id" class="form-control">
-                                    <option value=" {{ old('ville_id') ? '' : 'selected' }}">selectionez une ville</option>
+                                    <option value=" {{ old('ville_id') ? '' : 'selected' }}">@lang('lang.text_select_city')</option>
                                     @foreach($villes as $ville)
                                         <option value="{{ $ville->id }}" {{ old('ville_id') == $ville->id ? 'selected' : '' }}>{{ $ville->nom }}</option>
                                     @endforeach
@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="control-group col-12 mt-3">
-                                <input placeholder="Telephone" id="phone" name="phone" class="form-control" value="{{ old('phone') }}">
+                                <input placeholder="@lang('lang.text_telephone')" id="phone" name="phone" class="form-control" value="{{ old('phone') }}">
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -64,7 +64,7 @@
                             <hr>
 
                             <div class="control-group col-12 mt-3">
-                                <label for="dob">date de naissance:</label>
+                                <label for="dob">@lang('lang.text_dob'):</label>
                                 <input id="dob" name="dob" class="form-control" value="{{ old('dob') }}" placeholder="yyyy-mm-dd" >
                                 @error('dob')
                                     <span class="text-danger mt-8">{{ $message }}</span>
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="control-group col-12 mt-3">
-                                <label for="password">password:</label>
+                                <label for="password">@lang('lang.text_password'):</label>
                                 <input class="form-control" type="password" id="password" name="password">
                                 @error('password')
                                     <span class="text-danger mt-8">{{ $message }}</span>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="control-group col-12 mt-3">
-                                <label for="confirmation-password">confirm password:</label>
+                                <label for="confirmation-password">@lang('lang.text_confirmation_password'):</label>
                                 <input  class="form-control" type="password" id="confirmation-password" name="confirmation-password">
                                 @error('confirmation-password')
                                     <span class="text-danger mt-8">{{ $message }}</span>
@@ -89,7 +89,7 @@
                         </div>
 
                         <div class="card-footer text-center d-grid">
-                            <input type="submit" value="Sauvegarder" class="btn simple block btn-block">
+                            <input type="submit" value="@lang('lang.text_save')" class="btn simple block btn-block">
                         </div>
 
                     </form>

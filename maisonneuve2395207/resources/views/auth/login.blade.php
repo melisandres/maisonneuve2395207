@@ -27,7 +27,7 @@
                             @endif
                         </div>
                         <div class="control-group col-12">
-                            <label for="password">Password</label>
+                            <label for="password">mot de passe</label>
                             <input type="password" id="password" name="password" class="form-control">
                             @if($errors->has('password'))
                                 <span class="text-danger">{{$errors->first('password')}}</span>

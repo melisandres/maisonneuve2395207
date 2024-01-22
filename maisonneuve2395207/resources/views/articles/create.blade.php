@@ -6,19 +6,19 @@
                 <form  method="post">
                     @csrf
                     <div class="card-header display-6 text-center">
-                            Ajouter un article
+                        @lang('lang.article_create_heading')
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="control-group col-6">
-                                <label for="title">Title (en)</label>
+                                <label for="title"> @lang('lang.article_title_english')</label>
                                 <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}">
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="control-group col-6">
-                                <label for="title_fr">Titre (fr)</label>
+                                <label for="title_fr">@lang('lang.article_title_french')</label>
                                 <input type="text" id="title_fr" name="title_fr" class="form-control" value="{{ old('title_fr') }}">
                                 @error('title_fr')
                                     <span class="text-danger">{{ $message }}</span>
@@ -27,14 +27,14 @@
                         </div>
                         <div class="row">
                             <div class="control-group col-6">
-                                <label for="body">Article (en)</label>
+                                <label for="body">@lang('lang.article_english')</label>
                                 <textarea id="text" name="text" class="form-control custom-textarea">{!! old('text') !!}</textarea>
                                 @error('text')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="control-group col-6">
-                                <label for="body">Article (fr)</label>
+                                <label for="body">@lang('lang.article_french')</label>
                                 <textarea id="text_fr" name="text_fr" class="form-control custom-textarea">{!! old('text') !!}</textarea>
                                 @error('text_fr')
                                     <span class="text-danger">{{ $message }}</span>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <input type="submit" value="Sauvegarder" class="btn btn-success">
+                        <input type="submit" value="@lang('lang.text_save_caps')" class="btn btn-success">
                     </div>
                 </form>
             </div>

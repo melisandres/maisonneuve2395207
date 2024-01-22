@@ -3,10 +3,10 @@
 
     <div class="row">
         <div class="col-8">
-            Click on an article to read it!
+            @lang('lang.article_index_heading')
         </div>
         <div class="col-4">
-            <a href="{{ route('articles.create')}}" class="btn btn-primary">Add</a>
+            <a href="{{ route('articles.create')}}" class="btn btn-primary">@lang('lang.text_add_caps')</a>
         </div>
     </div>
     <hr>
@@ -14,7 +14,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Our articles</h4>
+                    <h4>@lang('lang.article_index_subheading')</h4>
                 </div>
                 <div class="card-body">
                     <ul>
@@ -22,7 +22,7 @@
                         <li><a href="{{ route('articles.show', $article->id)}}">{{ $article->title }}</a></li>
                         <p>{{ $article->hasUser->name }}</p>
                         @empty
-                        <li class="text-danger">No articles available!</li>
+                        <li class="text-danger">@lang('lang.articles_none')</li>
                         @endforelse
                     </ul>
                 </div>
