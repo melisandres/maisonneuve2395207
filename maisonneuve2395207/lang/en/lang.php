@@ -20,14 +20,18 @@ return [
     'text_delete_caps' => 'DELETE',
     'text_delete_heading' => 'Delete this data',
     'text_delete_notification' => 'Are you sure you want to delete this?',
+    'text_submit' => 'submit',
     'text_no' => 'No',
     'text_author' => 'Author',
     'text_close' => 'Close',
     'text_button_login' => 'Log in',
+    'text_student' => 'Student',
+    'text_download' => 'Download',
     //inputs
     'text_username' => 'Username',
     'text_name' => 'Name',
     'text_email' => 'Email',
+    'text_city' => 'City',
     'text_address' => 'Address',
     'text_select_city' => 'Select a city',
     'text_telephone' => 'Telephone',
@@ -37,6 +41,7 @@ return [
     //views
     //layouts/layout (nav)
     'text_hello' => 'Hello',
+    'text_my_account' => 'My Account',
     'text_registration' => 'Registration',
     'text_login' => 'Login',
     'text_students' => 'Students',
@@ -60,8 +65,25 @@ return [
     'registration_create_heading' => 'Create an account',
     //user edit
     'student_edit_heading' => 'Change your Information',
-    '' => '',
+    //etudiants index
+    'students_none' => 'No students available!',
+    //uploads create
+    'uploads_create_heading' => 'File Upload',
+    'text_chose_file' => 'Chose File',
+    'text_no_file' => 'No File Chosen',
+    'text_upload' => 'Upload',
+    'text_file_name_fr' => 'File name (french)',
+    'text_file_name_en' => 'File name (english)',
+    'text_file_name' => 'File name',
+    //uploads edit
+    'uploads_edit_heading' => 'Change this file',
+    'text_choose_new_file' => 'Choose New File',
+    //uploads index
+    'uploads_index_heading' => 'Click on a file to download it!',
+    'files_none' => 'No files available!',
+    'text_files' => 'Files',
     'text_addUser' => 'Add a user',
     'text_sauvegarder' => 'Save',
     'text_success_blog' => 'Article saved!',
+
 ];

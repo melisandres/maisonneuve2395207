@@ -157,7 +157,7 @@ class CustomAuthController extends Controller
         ]);
 
         // Redirect to a view or route of your choice
-        return redirect(route('etudiants.show', $user->hasEtudiant->id))->withSuccess('Etudiant mis à jour!');
+        return redirect(route('etudiants.show', $user->id))->withSuccess('Etudiant mis à jour!');
     }
 
     /**

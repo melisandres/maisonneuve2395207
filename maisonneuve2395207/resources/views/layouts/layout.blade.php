@@ -31,6 +31,9 @@
                             </li>
                         @else
                             <li class="nav-item">
+                                <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.show', auth()->user()->id)}}">@lang('lang.text_my_account')</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link mx-4 custom-link" href="{{ route('etudiants.index') }}">@lang('lang.text_students')</a>
                             </li>
                             <li class="nav-item">

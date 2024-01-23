@@ -5,7 +5,7 @@
         <div class="col-12 col-md-5 ">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4 class="">Nos étudiants</h4>
+                    <h4 class="">@lang('lang.text_students')</h4>
                 </div>
                 <div class="card-body">
                     <ul>
@@ -13,7 +13,7 @@
                         <!-- <li><a class="custom-link" href="{{ route('etudiants.show', $etudiant->user_id)}}">{{ $etudiant->hasUser->name }}</a></li> -->
                         <li><a class="custom-link" href="{{ route('etudiants.show', $etudiant->user_id) }}">{{ $etudiant->hasUser->name }}</a></li>
                         @empty
-                        <li class="text-danger">Aucun étudiant disponible !</li>
+                        <li class="text-danger">@lang('lang.students_none')</li>
                         @endforelse
                     </ul>
 
@@ -26,6 +26,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

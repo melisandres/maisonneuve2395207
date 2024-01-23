@@ -12,32 +12,32 @@
               {!! optional($etudiant->hasUser)->name !!}
               </h3>
               <p>
-                <strong>adresse: </strong>{!! $etudiant->adresse !!}
+                <strong>@lang('lang.text_address'): </strong>{!! $etudiant->adresse !!}
               </p>
               <p>
-                <strong>email: </strong>{!! optional($etudiant->hasUser)->email !!}
+                <strong>@lang('lang.text_email'): </strong>{!! optional($etudiant->hasUser)->email !!}
               </p>
               <p>
-                <strong>date de naissance: </strong>{!! $etudiant->dob !!}
+                <strong>@lang('lang.text_dob'): </strong>{!! $etudiant->dob !!}
               </p>
               <p>
-                <strong>ville: </strong>{{ $etudiant->etudiantHasVille->nom }}
+                <strong>@lang('lang.text_city'): </strong>{{ $etudiant->etudiantHasVille->nom }}
               </p>
               <p>
-                  <strong>telephone: </strong> {{ $etudiant->phone }}
+                  <strong>@lang('lang.text_telephone'): </strong> {{ $etudiant->phone }}
               </p>
             </div>
             <div class="row mt-5">
               <div class="col-3">
-                  <a href="{{ route('user.edit', $etudiant->id)}}" class="btn simple">Modifier</a>
+                  <a href="{{ route('user.edit', $etudiant->hasUser->id)}}" class="btn simple">@lang('lang.text_edit')</a>
               </div>
               <div class="col-3">
-                <a href="{{ route('etudiants.index')}}" class="btn simple">Retourner</a>
+                <a href="{{ route('etudiants.index')}}" class="btn simple">@lang('lang.text_return')</a>
               </div>
               <div class="col-3">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn simple" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                Effacer
+                @lang('lang.text_delete')
                 </button>
               </div>
           </div>
@@ -52,18 +52,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Effacer la donnée</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">@lang('lang.text_delete_heading')</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       Etes-vous sûr de vouloir efffacer la donnée?
+      @lang('lang.text_delete_notification')
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn simple" data-bs-dismiss="modal">Non</button>
+        <button type="button" class="btn simple" data-bs-dismiss="modal">@lang('lang.text_no')</button>
         <form method="post" action="{{ route('user.delete', $user) }}">
             @csrf
             @method('delete')
-            <input type="submit" value="Effacer" class="btn simple">
+            <input type="submit" value="@lang('lang.text_delete')" class="btn simple">
         </form>
       </div>
     </div>
