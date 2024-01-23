@@ -81,9 +81,4 @@ return [
     //uploads index
     'uploads_index_heading' => 'Click on a file to download it!',
     'files_none' => 'No files available!',
-    'text_files' => 'Files',
-    'text_addUser' => 'Add a user',
-    'text_sauvegarder' => 'Save',
-    'text_success_blog' => 'Article saved!',
-
 ];

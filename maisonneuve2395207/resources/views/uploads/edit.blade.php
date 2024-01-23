@@ -33,10 +33,14 @@
     </div>
 
     <script>
+        var langNoFile = "{{ $upload->file_path }}";
+    </script>
+
+    <script>
         // Display the existing file name or "No file chosen"
         document.getElementById('file').addEventListener('change', function () {
             var fileInfo = document.getElementById('file-info');
-            fileInfo.textContent = this.files.length > 0 ? this.files[0].name : 'No file chosen';
+            fileInfo.textContent = this.files.length > 0 ? this.files[0].name : langNoFile;
         });
     </script>
 @endsection

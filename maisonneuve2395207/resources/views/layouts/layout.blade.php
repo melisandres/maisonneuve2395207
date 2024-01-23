@@ -43,7 +43,7 @@
                                 <a class="nav-link mx-4 custom-link" href="{{route('uploads.index')}}">@lang('lang.text_files')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-4 custom-link" href="{{ route('logout') }}">Logout</a>
+                                <a class="nav-link mx-4 custom-link" href="{{ route('logout') }}">@lang('lang.text_logout')</a>
                             </li>
                         @endguest
                         <li class="nav-item">

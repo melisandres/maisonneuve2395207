@@ -6,18 +6,79 @@
 //they are just called differently in blade.
 
 return [
-    //nav
+
+    //general
+    'text_save' => 'Enregistrer',
+    'text_save_caps' => 'ENREGISTRER',
+    'text_add' => 'Ajouter',
+    'text_add_caps' => 'AJOUTER',
+    'text_return' => 'Retourner',
+    'text_return_caps' => 'RETOURNER',
+    'text_edit' => 'Modifier',
+    'text_edit_caps' => 'MODIFIER',
+    'text_delete' => 'Supprimer',
+    'text_delete_caps' => 'SUPPRIMER',
+    'text_delete_heading' => 'Supprimer ces données',
+    'text_delete_notification' => 'Êtes-vous sûr de vouloir supprimer ceci?',
+    'text_submit' => 'Soumettre',
+    'text_no' => 'Non',
+    'text_author' => 'Auteur',
+    'text_close' => 'Fermer',
+    'text_button_login' => 'Connexion',
+    'text_student' => 'Étudiant',
+    'text_download' => 'Télécharger',
+    //inputs
+    'text_username' => 'Nom d\'utilisateur',
+    'text_name' => 'Nom',
+    'text_email' => 'Courriel',
+    'text_city' => 'Ville',
+    'text_address' => 'Adresse',
+    'text_select_city' => 'Sélectionner une ville',
+    'text_telephone' => 'Téléphone',
+    'text_dob' => 'Date de naissance',
+    'text_password' => 'Mot de passe',
+    'text_confirmation_password' => 'Confirmer le mot de passe',
+    //views
+    //layouts/layout (nav)
     'text_hello' => 'Bonjour',
+    'text_my_account' => 'Mon compte',
     'text_registration' => 'Inscription',
     'text_login' => 'Connexion',
     'text_students' => 'Étudiants',
     'text_articles' => 'Articles',
-    'text_files' => 'Dossiers',
+    'text_files' => 'Fichiers',
     'text_logout' => 'Déconnexion',
-    'text_addUser' => 'Add a user',
-    'text_name' => 'Name',
-    'text_username' => 'Username',
-    'text_password' => 'Password',
-    'text_sauvegarder' => 'Save',
-    'text_success_blog' => 'Article saved!',
+    //articles
+    'article_title_english' => 'Titre (anglais)',
+    'article_title_french' => 'Titre (français)',
+    'article_english' => 'Article (anglais)',
+    'article_french' => 'Article (français)',
+    //articles create
+    'article_create_heading' => 'Écrire un article',
+    //articles edit
+    'article_edit_heading' => 'Modifier votre article',
+    //articles index
+    'article_index_heading' => 'Cliquez sur un article pour le lire!',
+    'article_index_subheading' => 'Nos articles',
+    'articles_none' => 'Aucun article disponible!',
+    //registration create
+    'registration_create_heading' => 'Créer un compte',
+    //user edit
+    'student_edit_heading' => 'Modifier vos informations',
+    //etudiants index
+    'students_none' => 'Aucun étudiant disponible!',
+    //uploads create
+    'uploads_create_heading' => 'Téléchargement de fichier',
+    'text_chose_file' => 'Choisir le fichier',
+    'text_no_file' => 'Aucun fichier choisi',
+    'text_upload' => 'Télécharger',
+    'text_file_name_fr' => 'Nom du fichier (français)',
+    'text_file_name_en' => 'Nom du fichier (anglais)',
+    'text_file_name' => 'Nom du fichier',
+    //uploads edit
+    'uploads_edit_heading' => 'Modifier ce fichier',
+    'text_choose_new_file' => 'Choisir un nouveau fichier',
+    //uploads index
+    'uploads_index_heading' => 'Cliquez sur un fichier pour le télécharger!',
+    'files_none' => 'Aucun fichier disponible!',
 ];
