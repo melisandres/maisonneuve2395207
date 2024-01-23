@@ -29,8 +29,7 @@ class UploadsController extends Controller
             //add an order to these?
             return view('uploads.index', compact('uploads'));
         }else{
-            return redirect(route('login'))->withErrors('Vous n\'
-            êtes pas autorisé à accéder aux documents');
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 
@@ -74,7 +73,7 @@ class UploadsController extends Controller
             'file_path' => $fileName
         ]);
 
-        return redirect()->route('uploads.index')->withSuccess('File uploaded successfully.');
+        return redirect()->route('uploads.index')->withSuccess(trans('lang.text_upload_saved'));
     }
 
     /**
@@ -102,11 +101,11 @@ class UploadsController extends Controller
 
             } else {
                 // Authenticated user does not have access to the upload
-                return redirect()->route('uploads.index')->withErrors('Vous n\'êtes pas autorisé à modifier ce document.');
+                return redirect()->route('uploads.index')->withErrors(trans('lang.text_denied'));
             }
         } else {
             // User is not authenticated
-            return redirect(route('login'))->withErrors('Vous n\'êtes pas autorisé à accéder a cette fonctionalité.');
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 
@@ -148,7 +147,7 @@ class UploadsController extends Controller
             'title_fr' => $request->title_fr,
         ]);
 
-        return redirect()->route('uploads.index')->withSuccess('File updated successfully.');
+        return redirect()->route('uploads.index')->withSuccess(trans('lang.text_upload_edit'));
     }
 
     /**
@@ -166,7 +165,7 @@ class UploadsController extends Controller
         // Delete the file from storage
         Storage::disk('uploads')->delete($filePath);
 
-        return redirect(route('uploads.index'))->withSuccess('File deleted!');
+        return redirect(route('uploads.index'))->withSuccess(trans('lang.text_upload_deleted'));
     }
 
     public function download($filename)

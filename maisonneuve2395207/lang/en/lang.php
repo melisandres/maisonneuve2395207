@@ -81,4 +81,17 @@ return [
     //uploads index
     'uploads_index_heading' => 'Click on a file to download it!',
     'files_none' => 'No files available!',
+    //messages
+    'text_access_denied' => 'Access denied without login.',
+    'text_article_saved' => 'Article saved!',
+    'text_denied' => 'Unnauthorized action',
+    'text_article_edit' => 'Article modified!',
+    'text_article_deleted' => 'Article deleted!',
+    'text_student_saved' => 'Student information saved!',
+    'text_student_edited' => 'Student information modified!',
+    'text_student_deleted' => 'You have successfully been deleted from our databases!',
+    'text_upload_saved' => 'File uploaded successfully.',
+    'text_upload_edit' => 'File updated successfully.',
+    'text_upload_deleted' => 'File deleted!',
+
 ];

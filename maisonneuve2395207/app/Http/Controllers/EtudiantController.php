@@ -124,7 +124,7 @@ class EtudiantController extends Controller
             'ville_id' => $request->ville_id,
         ]);
 
-        return redirect(route('etudiants.show', $etudiant->id))->withSuccess('Etudiant mis a jour!');;
+        return redirect(route('etudiants.show', $etudiant->id))->withSuccess(trans('lang.text_student_edited'));;
     }
 
     /**

@@ -64,12 +64,7 @@ class CustomAuthController extends Controller
         $user->hasEtudiant()->save($newEtudiant);
 
         //return a view of the new etudiant;
-        return redirect(route('etudiants.show', $newEtudiant->id))->withSuccess('Etudiant enregistré!');
-
-        //or return to the login page? 
-
-        // return redirect()->back()->withSuccess('User enregistré');
-        //return redirect(route('login'))->withSuccess('User enregistré');
+        return redirect(route('etudiants.show', $newEtudiant->id))->withSuccess(trans('lang.text_student_saved'));
     }
 
     public function authentication(Request $request){
@@ -157,7 +152,7 @@ class CustomAuthController extends Controller
         ]);
 
         // Redirect to a view or route of your choice
-        return redirect(route('etudiants.show', $user->id))->withSuccess('Etudiant mis à jour!');
+        return redirect(route('etudiants.show', $user->id))->withSuccess(trans('lang.text_student_edited'));
     }
 
     /**
@@ -175,9 +170,9 @@ class CustomAuthController extends Controller
 
             //you have to log them out!
             Auth::logout();
-            return redirect(route('dashboard'))->withSuccess('You have successfully been deleted from our databases!');
+            return redirect(route('dashboard'))->withSuccess(trans('lang.text_student_deleted'));
         }else{
-            return redirect()->back()->withErrors('Cannot delete another student');
+            return redirect()->back()->withErrors(trans('lang.text_denied'));
         }
 
     }

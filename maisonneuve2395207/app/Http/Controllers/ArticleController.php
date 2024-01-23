@@ -13,14 +13,15 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        //is the user logged in?
         if(Auth::check()){
-
             //TODO: consider using 'hasUser' here, since its the same
             //code. Just test it. to make sure.
-            $articles = Article::with('user')->paginate(1);
-            //add an order to these?
+            $articles = Article::with('user')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
-            //tranlate if the user has selected french
+            //send the french title and text if the user has selected french
             $locale = app()->getLocale();
             if ($locale == 'fr'){
                 foreach($articles as $article){
@@ -34,8 +35,8 @@ class ArticleController extends Controller
             }
             return view('articles.index', compact('articles'));
         }else{
-            return redirect(route('login'))->withErrors('Vous n\'
-            êtes pas autorisé à accéder aux articles');
+            //return to login, with error if the user is not logged in
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 
@@ -44,11 +45,12 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        //check if the user is logged in
         if(Auth::check()){
             return view('articles.create');
         }else{
-            return redirect(route('login'))->withErrors('Vous n\'
-            êtes pas autorisé à accéder au create articles');
+            //return to login, with error if the user is not logged in
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 
@@ -57,15 +59,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //check if the user is logged in
         if(Auth::check()){
-            //NEXT STEP ADD VALIDATION TO YOUR VIEW
+            //validation
             $request->validate([
                 'title' => 'required|min:2|max:190',
                 'title_fr' => 'max:190',
                 'text' => 'required|min:10|max:65500',
                 'text_fr' => 'max:65500'
             ]);
-            /* dd($request); */
 
             //get the user id from user logged in
             $user = Auth::user();
@@ -80,15 +82,14 @@ class ArticleController extends Controller
                 'user_id' => $userID
             ]);
 
-            // Save the new article
+            //Save the new article
             $newArticle->save();
 
             //return a view of the new article;
-            return redirect(route('articles.show', $newArticle->id))->withSuccess('Article saved!');
+            return redirect(route('articles.show', $newArticle->id))->withSuccess(trans('lang.text_article_saved'));
         }else{
             //send the user to the login
-            return redirect(route('login'))->withErrors('Vous n\'
-            êtes pas autorisé à accéder');
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 
@@ -114,8 +115,7 @@ class ArticleController extends Controller
             
             return view('articles.show', compact('article', 'user'));
         }else{
-            return redirect(route('login'))->withErrors('Vous n\'
-            êtes pas autorisé à accéder a un article');
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 
@@ -136,11 +136,11 @@ class ArticleController extends Controller
 
             } else {
                 // Authenticated user does not have access to the article
-                return redirect()->route('articles.index')->withErrors('Vous n\'êtes pas autorisé à modifier cet article.');
+                return redirect()->route('articles.index')->withErrors(trans('lang.text_denied'));
             }
         } else {
             // User is not authenticated
-            return redirect(route('login'))->withErrors('Vous n\'êtes pas autorisé à accéder.');
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 
@@ -164,9 +164,9 @@ class ArticleController extends Controller
                 'text_fr' => $request->text_fr
             ]);
 
-            return redirect(route('articles.show', $article->id))->withSuccess('Article mis a jour!');
+            return redirect(route('articles.show', $article->id))->withSuccess(trans('lang.text_article_edit'));
         }else{
-            return redirect(route('login'))->withErrors('Vous devez être connectées pour faire cela!');;
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));;
         }
     }
 
@@ -182,13 +182,13 @@ class ArticleController extends Controller
             // Check if the authenticated user's ID matches the article's user_id
             if ($authenticatedUserId == $article->user_id) {
                 $article->delete();
-                return redirect(route('articles.index'))->withSuccess('Article effacé!');;
+                return redirect(route('articles.index'))->withSuccess(trans('lang.text_article_delete'));;
             }else{
-                return redirect(route('articles.index'))->withErrors('Vous navez pas ce privilege!');;
+                return redirect(route('articles.index'))->withErrors(trans('lang.text_denied'));;
             }
         }
         else{
-            return redirect(route('login'))->withErrors('Vous navez pas ce privilege!');;
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));;
         }
     }
 }

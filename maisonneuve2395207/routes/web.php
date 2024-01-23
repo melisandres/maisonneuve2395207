@@ -60,7 +60,6 @@ Route::get('/upload-edit/{upload}', [UploadsController::class, 'edit'])->name('u
 Route::put('/upload-edit/{upload}', [UploadsController::class, 'update'])->name('upload.update');
 Route::delete('/upload-delete/{uploads}', [UploadsController::class, 'destroy'])->name('upload.delete');
 
-
 //dashboard
 Route::get('/dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 

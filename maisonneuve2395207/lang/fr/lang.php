@@ -81,4 +81,16 @@ return [
     //uploads index
     'uploads_index_heading' => 'Cliquez sur un fichier pour le télécharger!',
     'files_none' => 'Aucun fichier disponible!',
+    //messages
+    'text_access_denied' => 'Accès refusé sans connexion',
+    'text_article_saved' => 'Article sauvegardé!',
+    'text_denied' => 'Action non autorisée',
+    'text_article_edit' => 'Article mis à jour!',
+    'text_article_deleted' => 'Article supprimé!',
+    'text_student_saved' => 'Informations de l\'étudiant sauvegardés!',
+    'text_student_edited' => 'Informations de l\'étudiant modifiées !',
+    'text_student_deleted' => 'Vous avez été supprimé avec succès de nos bases de données!',
+    'text_upload_saved' => 'Fichier téléchargé avec succès.',
+    'text_upload_edit' => 'Fichier mis à jour avec succès.',
+    'text_upload_deleted' => 'Fichier supprimé!',
 ];
