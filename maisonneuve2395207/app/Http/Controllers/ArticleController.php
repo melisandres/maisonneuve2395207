@@ -14,10 +14,24 @@ class ArticleController extends Controller
     public function index()
     {
         if(Auth::check()){
+
             //TODO: consider using 'hasUser' here, since its the same
             //code. Just test it. to make sure.
             $articles = Article::with('user')->paginate(1);
             //add an order to these?
+
+            //tranlate if the user has selected french
+            $locale = app()->getLocale();
+            if ($locale == 'fr'){
+                foreach($articles as $article){
+                    if($article->title_fr != ""){
+                        $article->title = $article->title_fr;
+                    }
+                    if($article->text_fr != ""){
+                        $article->text = $article->text_fr;
+                    }
+                }
+            }
             return view('articles.index', compact('articles'));
         }else{
             return redirect(route('login'))->withErrors('Vous n\'
@@ -85,7 +99,19 @@ class ArticleController extends Controller
     {
         if(Auth::check()){
             $user = $article->hasUser;
-            //try find by id etudian, city id... to fix the webdev issue...
+
+            //translate if locale == fr
+            $locale = app()->getLocale();
+            if ($locale == 'fr'){
+                if($article->title_fr != ""){
+                    $article->title = $article->title_fr;
+                }
+                if($article->text_fr != ""){
+                    $article->text = $article->text_fr;
+                }
+            }
+
+            
             return view('articles.show', compact('article', 'user'));
         }else{
             return redirect(route('login'))->withErrors('Vous n\'

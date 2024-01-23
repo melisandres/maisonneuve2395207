@@ -16,6 +16,16 @@ class UploadsController extends Controller
     {
         if(Auth::check()){
             $uploads = Uploads::with('hasUser')->paginate(10);
+
+            //translate if fr is selected
+            $locale = app()->getLocale();
+            if ($locale == 'fr'){
+                foreach($uploads as $upload){
+                    if($upload->title_fr != ""){
+                        $upload->title = $upload->title_fr;
+                    }
+                }
+            }
             //add an order to these?
             return view('uploads.index', compact('uploads'));
         }else{

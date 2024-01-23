@@ -45,7 +45,7 @@
                                             <div class="col-4">
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-upload-id="{{ $upload->id }}">
-                                                Effacer
+                                                    @lang('lang.text_delete')
                                                 </button>
                                             </div>
                                         </td>
@@ -87,7 +87,7 @@
                 <form method="POST" action="{{ route('upload.delete', ':id') }}" id="deleteForm">
                     @csrf
                     @method('DELETE')
-                    <input type="submit" value="Effacer" class="btn btn-danger">
+                    <input type="submit" value="@lang('lang.text_delete')" class="btn btn-danger">
                 </form>
             </div>
         </div>
