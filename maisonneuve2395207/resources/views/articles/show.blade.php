@@ -3,11 +3,29 @@
 
     <div class="row">
         <div class="col-12 pt-2">
-            <a href="{{ route('articles.index')}}" class="btn btn-outline-primary">@lang('lang.text_return')</a>
-            <h4 class="display-1 text-light mt-2">
+
+<!--             <h4 class="display-1 text-light mt-2 d-inline">
                 {{ $article->title }}
             </h4>
+            <p class="d-inline text-light mt-2 mb-5">( {{ $article->updated_at }} )</p>
+            <a href="{{ route('articles.index')}}" class="btn btn-outline-warning text-right mb-3 ">@lang('lang.text_return')</a> -->
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                  <h4 class="display-1 text-light d-inline mt-2">
+                      {{ $article->title }}
+                  </h4>
+                  <p class="text-light d-inline mt-2 mb-5">
+                      ( {{ $article->updated_at }} )
+                  </p>
+              </div>
+              <a href="{{ route('articles.index')}}" class="btn btn-outline-warning mb-3">
+                  @lang('lang.text_return')
+              </a>
+          </div>
+
             <hr class="text-light">
+          
             <p class="display-5 text-light mt-2">
                 <strong>@lang('lang.text_author'):</strong> {{ $article->hasUser?->name }}
             </p>
