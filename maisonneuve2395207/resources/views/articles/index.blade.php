@@ -13,20 +13,35 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-12">
+        <div class="col-8">
             <div class="card">
                 <div class="card-header">
                     <h4 class="text-muted">@lang('lang.article_index_subheading')</h4>
                 </div>
                 <div class="card-body">
-                    <ul>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         @forelse($articles as $article)
-                        <li><a href="{{ route('articles.show', $article->id)}}">{{ $article->title }}</a></li>
-                        <p>@lang('lang.text_by') {{ $article->hasUser->name }}</p>
+                        <tr>
+                            <td><a href="{{ route('articles.show', $article->id)}}">{{ $article->title }}</a></td>
+                            <td>@lang('lang.text_by') {{ $article->hasUser->name }}</td>
+                            <td>{{ $article->updated_at }}</td>
+                        </tr>
                         @empty
-                        <li class="text-danger">@lang('lang.articles_none')</li>
+                        <tr>
+                            <td colspan="3" class="text-danger">@lang('lang.articles_none')</td>
+                        </tr>
                         @endforelse
-                    </ul>
+                    </tbody>
+                </table>
+
                 </div>
                 <div class="card-footer pagination">
                     {{ $articles->links() }}

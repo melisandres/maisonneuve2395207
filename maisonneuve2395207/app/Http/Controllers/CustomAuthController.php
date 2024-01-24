@@ -91,8 +91,8 @@ class CustomAuthController extends Controller
         //so you can log them in
         Auth::login($user);
 
-        //TODO: you will not have a dashboard, so you need to clean this up
-        return redirect()->intended(route('dashboard'));
+        //send to the originally intended route OR to articles
+        return redirect()->intended(route('articles.index'));
     }
 
     public function logout(){
