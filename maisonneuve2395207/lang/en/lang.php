@@ -93,5 +93,4 @@ return [
     'text_upload_saved' => 'File uploaded successfully.',
     'text_upload_edit' => 'File updated successfully.',
     'text_upload_deleted' => 'File deleted!',
-
 ];
