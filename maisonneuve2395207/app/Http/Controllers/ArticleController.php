@@ -111,8 +111,6 @@ class ArticleController extends Controller
                     $article->text = $article->text_fr;
                 }
             }
-
-            
             return view('articles.show', compact('article', 'user'));
         }else{
             return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
@@ -182,13 +180,13 @@ class ArticleController extends Controller
             // Check if the authenticated user's ID matches the article's user_id
             if ($authenticatedUserId == $article->user_id) {
                 $article->delete();
-                return redirect(route('articles.index'))->withSuccess(trans('lang.text_article_delete'));;
+                return redirect(route('articles.index'))->withSuccess(trans('lang.text_article_delete'));
             }else{
-                return redirect(route('articles.index'))->withErrors(trans('lang.text_denied'));;
+                return redirect(route('articles.index'))->withErrors(trans('lang.text_denied'));
             }
         }
         else{
-            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));;
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
     }
 }

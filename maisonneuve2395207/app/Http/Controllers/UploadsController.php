@@ -38,7 +38,11 @@ class UploadsController extends Controller
      */
     public function create()
     {
-        return view('uploads.create');
+        if(Auth::check()){
+            return view('uploads.create');
+        }else{
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
+        }
     }
 
     /**
@@ -46,34 +50,38 @@ class UploadsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'file' => 'required|file|mimes:pdf,zip,doc,jpg,jpeg',
-            'title' => 'required|min:2|max:255',
-            'title_fr' => ' min:2|max:255',
-        ]);
+        if(Auth::check()){
+            $request->validate([
+                'file' => 'required|file|mimes:pdf,zip,doc,jpg,jpeg',
+                'title' => 'required|min:2|max:255',
+                'title_fr' => ' min:2|max:255',
+            ]);
 
-        //retrieve file, and concatenate the date and the original filename
-        $file = $request->file('file');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-
-
-        // Save file to storage/app/public/uploads
-        Storage::disk('uploads')->putFileAs('', $file, $fileName);
+            //retrieve file, and concatenate the date and the original filename
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
 
 
-        //get the user id from user logged in
-        $user = Auth::user();
-        $userID = $user->id;
+            // Save file to storage/app/public/uploads
+            Storage::disk('uploads')->putFileAs('', $file, $fileName);
 
-        //add the uploaded file info to the db
-        Uploads::create([
-            'title' => $request->title,
-            'title_fr' => $request->title_fr,
-            'user_id' => $userID,
-            'file_path' => $fileName
-        ]);
 
-        return redirect()->route('uploads.index')->withSuccess(trans('lang.text_upload_saved'));
+            //get the user id from user logged in
+            $user = Auth::user();
+            $userID = $user->id;
+
+            //add the uploaded file info to the db
+            Uploads::create([
+                'title' => $request->title,
+                'title_fr' => $request->title_fr,
+                'user_id' => $userID,
+                'file_path' => $fileName
+            ]);
+
+            return redirect()->route('uploads.index')->withSuccess(trans('lang.text_upload_saved'));
+        }else{
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
+        }
     }
 
     /**
@@ -114,40 +122,51 @@ class UploadsController extends Controller
      */
     public function update(Request $request, Uploads $upload)
     {
-        $request->validate([
-            'file' => 'file|mimes:pdf,zip,doc,jpg,jpeg',
-            'title' => 'required|min:2|max:255',
-            'title_fr' => ' min:2|max:255',
-        ]);
+        if(Auth::check()){
+            // Get the authenticated user's ID
+            $authenticatedUserId = Auth::user()->id;
 
-            // Check if a new file is provided
-        if ($request->hasFile('file')) {
-            // Delete the previous file
-            Storage::disk('uploads')->delete($upload->file_path);
+            // Check if the authenticated user's ID matches the upload's user_id
+            if ($authenticatedUserId == $upload->user_id) {
+                $request->validate([
+                    'file' => 'file|mimes:pdf,zip,doc',
+                    'title' => 'required|min:2|max:255',
+                    'title_fr' => ' min:2|max:255',
+                ]);
 
-            // Retrieve the new file and concatenate the date and the original filename
-            $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+                    // Check if a new file is provided
+                if ($request->hasFile('file')) {
+                    // Delete the previous file
+                    Storage::disk('uploads')->delete($upload->file_path);
 
-            // Save the new file to storage/app/public/uploads
-            Storage::disk('uploads')->putFileAs('', $file, $fileName);
+                    // Retrieve the new file and concatenate the date and the original filename
+                    $file = $request->file('file');
+                    $fileName = time() . '_' . $file->getClientOriginalName();
 
-            // Update the file_path in the database
-            $upload->update(['file_path' => $fileName]);
+                    // Save the new file to storage/app/public/uploads
+                    Storage::disk('uploads')->putFileAs('', $file, $fileName);
 
-            //retrieve file, and concatenate the date and the original filename
-            $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+                    // Update the file_path in the database
+                    $upload->update(['file_path' => $fileName]);
+
+                    //retrieve file, and concatenate the date and the original filename
+                    $file = $request->file('file');
+                    $fileName = time() . '_' . $file->getClientOriginalName();
+
+                    // Update other fields in the database
+                    $upload->update([
+                        'title' => $request->title,
+                        'title_fr' => $request->title_fr,
+                    ]);
+
+                    return redirect()->route('uploads.index')->withSuccess(trans('lang.text_upload_edit'));
+                }
+            }else{
+                return redirect()->back()->withErrors(trans('lang.text_denied'));
+            }
+        }else{
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
-
-        
-        // Update other fields in the database
-        $upload->update([
-            'title' => $request->title,
-            'title_fr' => $request->title_fr,
-        ]);
-
-        return redirect()->route('uploads.index')->withSuccess(trans('lang.text_upload_edit'));
     }
 
     /**
@@ -155,23 +174,39 @@ class UploadsController extends Controller
      */
     public function destroy(Uploads $uploads)
     {
+        if(Auth::check()){
+            // Get the authenticated user's ID
+            $authenticatedUserId = Auth::user()->id;
 
-       // Get the file path before deleting the record
-        $filePath = $uploads->file_path;
+            // Check if the authenticated user's ID matches the upload's user_id
+            if ($authenticatedUserId == $uploads->user_id) {
 
-        // Delete the record from the database
-        $uploads->delete();
+                 // Get the file path before deleting the record
+                $filePath = $uploads->file_path;
 
-        // Delete the file from storage
-        Storage::disk('uploads')->delete($filePath);
+                // Delete the record from the database
+                $uploads->delete();
 
-        return redirect(route('uploads.index'))->withSuccess(trans('lang.text_upload_deleted'));
+                // Delete the file from storage
+                Storage::disk('uploads')->delete($filePath);
+
+                return redirect(route('uploads.index'))->withSuccess(trans('lang.text_upload_deleted'));
+            }else{
+                return redirect()->back()->withErrors(trans('lang.text_denied'));
+            }
+        }else{
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
+        }
     }
 
     public function download($filename)
     {
-        $filePath = Storage::disk('uploads')->path($filename);
+        if(Auth::check()){
+            $filePath = Storage::disk('uploads')->path($filename);
 
-        return response()->download($filePath);
+            return response()->download($filePath);
+        }else{
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
+        }
     }
 }

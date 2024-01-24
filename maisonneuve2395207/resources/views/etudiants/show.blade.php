@@ -28,18 +28,22 @@
               </p>
             </div>
             <div class="row mt-5">
+              @can('updateEtudiant', $etudiant)
               <div class="col-3">
                   <a href="{{ route('user.edit', $etudiant->hasUser->id)}}" class="btn simple">@lang('lang.text_edit')</a>
               </div>
+              @endcan
               <div class="col-3">
                 <a href="{{ route('etudiants.index')}}" class="btn simple">@lang('lang.text_return')</a>
               </div>
+              @can('updateEtudiant', $etudiant)
               <div class="col-3">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn simple" data-bs-toggle="modal" data-bs-target="#deleteModal">
                 @lang('lang.text_delete')
                 </button>
               </div>
+              @endcan
           </div>
         </div>
     </div>

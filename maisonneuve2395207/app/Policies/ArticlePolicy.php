@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Etudiant;
 
 class ArticlePolicy
 {
@@ -22,4 +23,11 @@ class ArticlePolicy
     {
         return $user->id === $article->user_id;
     }
+
+    //same for buttons to edit student information
+    public function updateEtudiant(User $user, Etudiant $etudiant)
+    {
+        return $user->id === $etudiant->user_id;
+    }
+
 }

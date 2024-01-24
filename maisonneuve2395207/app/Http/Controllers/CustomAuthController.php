@@ -18,6 +18,7 @@ class CustomAuthController extends Controller
      */
     public function index()
     {
+        //this is your login page
         return view('auth.index');
     }
 
@@ -63,26 +64,34 @@ class CustomAuthController extends Controller
         // Create a new etudiant and associate it with the user
         $user->hasEtudiant()->save($newEtudiant);
 
+        // Log in the user
+        Auth::login($user);
+
         //return a view of the new etudiant;
         return redirect(route('etudiants.show', $newEtudiant->id))->withSuccess(trans('lang.text_student_saved'));
     }
 
     public function authentication(Request $request){
+        //validate the login
         $request->validate([
-        /* or is it exists:users.email */
         'email' => 'required|email|exists:users',
         'password' => 'required|min:6|max:20'
         ]);
 
         $credentials = $request->only('email', 'password');
+
+        //send errors if there isn't a match
         if(!Auth::validate($credentials)):
             return redirect(route('login'))->withErrors(trans('auth.password'))->withInput();
         endif;
 
+        //get the user info
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
+        //so you can log them in
         Auth::login($user);
 
+        //TODO: you will not have a dashboard, so you need to clean this up
         return redirect()->intended(route('dashboard'));
     }
 
@@ -114,12 +123,19 @@ class CustomAuthController extends Controller
      */
     public function edit(User $user)
     {
-        if (Auth::check() && $user->id === Auth::id()) {
-            //test if this works  
+        //the user has to be logged in to access this
+        if (Auth::check()) {
+            //and a user can not modify another user's information
+            if($user->id === Auth::id()){
+                $villes = Ville::all();
+                $etudiant = $user->hasEtudiant;
+                return view('Auth.edit', compact('etudiant', 'villes', 'user'));
+            }else{
+                return redirect()->back()->withErrors(trans('lang.text_denied'));
+            }
+        }else{
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
-        $villes = Ville::all();
-        $etudiant = $user->hasEtudiant;
-        return view('Auth.edit', compact('etudiant', 'villes', 'user'));
     }
 
     /**
@@ -127,32 +143,41 @@ class CustomAuthController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Validate the incoming request data for the update
-        $request->validate([
-            'name' => 'required|min:2|max:50',
-            'adresse' => 'required|min:2|max:255',
-            'phone' => 'required|min:10|max:20',
-            'email' => "email|required|unique:users,email,$user->id",
-            'dob' => 'required|date|date_format:Y-m-d|before:today',
-            'ville_id' => 'required|exists:villes,id',
-        ]);
+        //make user the user is logged in, and it is the right user
+        if (Auth::check()) {
+            if($user->id === Auth::id()){
+                // Validate the incoming request data for the update
+                $request->validate([
+                    'name' => 'required|min:2|max:50',
+                    'adresse' => 'required|min:2|max:255',
+                    'phone' => 'required|min:10|max:20',
+                    'email' => "email|required|unique:users,email,$user->id",
+                    'dob' => 'required|date|date_format:Y-m-d|before:today',
+                    'ville_id' => 'required|exists:villes,id',
+                ]);
 
-        // Update the user data
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+                // Update the user data
+                $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
 
-        // Update the associated etudiant data
-        $user->hasEtudiant->update([
-            'adresse' => $request->adresse,
-            'phone' => $request->phone,
-            'dob' => $request->dob,
-            'ville_id' => $request->ville_id,
-        ]);
+                // Update the associated etudiant data
+                $user->hasEtudiant->update([
+                    'adresse' => $request->adresse,
+                    'phone' => $request->phone,
+                    'dob' => $request->dob,
+                    'ville_id' => $request->ville_id,
+                ]);
 
-        // Redirect to a view or route of your choice
-        return redirect(route('etudiants.show', $user->id))->withSuccess(trans('lang.text_student_edited'));
+                // Redirect to a view or route of your choice
+                return redirect(route('etudiants.show', $user->id))->withSuccess(trans('lang.text_student_edited'));
+            }else{
+                return redirect()->back()->withErrors(trans('lang.text_denied'));
+            }
+        }else{
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
+        }
     }
 
     /**
@@ -160,19 +185,23 @@ class CustomAuthController extends Controller
      */
     public function destroy(User $user)
     {
-        if (Auth::check() && $user->id === Auth::id()) {
+        //make sure the user is logged in and is the user concerned
+        if (Auth::check()) {
+            if ($user->id === Auth::id()){
+                // Delete the associated student
+                $user->hasEtudiant()->delete();
 
-            // Delete the associated student
-            $user->hasEtudiant()->delete();
+                // Delete the user
+                $user->delete();
 
-            // Delete the user
-            $user->delete();
-
-            //you have to log them out!
-            Auth::logout();
-            return redirect(route('dashboard'))->withSuccess(trans('lang.text_student_deleted'));
+                //you have to log them out!
+                Auth::logout();
+                return redirect(route('dashboard'))->withSuccess(trans('lang.text_student_deleted'));
+            }else{
+                return redirect()->back()->withErrors(trans('lang.text_denied'));
+            }
         }else{
-            return redirect()->back()->withErrors(trans('lang.text_denied'));
+            return redirect(route('login'))->withErrors(trans('lang.text_access_denied'));
         }
 
     }
