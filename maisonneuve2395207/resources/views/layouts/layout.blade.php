@@ -47,10 +47,10 @@
                             </li>
                         @endguest
                         <li class="nav-item">
-                            <a class="nav-link mx-4 custom-link @if ($locale=='fr') bg-info @endif" href="{{route('lang', 'fr')}}">fr<i class=""></i></a>
+                            <a class="nav-link mx-4 w-10 custom-link @if ($locale=='fr') text-warning @else text-muted @endif" href="{{route('lang', 'fr')}}">fr<i class=""></i></a>
                         </li>
                         <li>
-                            <a class="nav-link mx-4 custom-link  @if($locale=='en') bg-info @endif" href="{{route('lang', 'en')}}">en<i class=""></i></a>
+                            <a class="nav-link mx-4 w-10 custom-link  @if($locale=='en') text-warning @else text-muted @endif" href="{{route('lang', 'en')}}">en<i class=""></i></a>
                         </li>
                     </ul>   
                 </div>

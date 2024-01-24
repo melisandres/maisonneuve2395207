@@ -3,8 +3,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-8">
-            @lang('lang.uploads_index_heading')
+        <div class="col-8 font-weight-bold text-light">
+            <h1 class="display-1">
+                @lang('lang.uploads_index_heading')
+            </h1>
         </div>
         <div class="col-4">
             <a href="{{ route('upload.create')}}" class="btn btn-primary">@lang('lang.text_add')</a>
@@ -15,7 +17,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>@lang('lang.text_files')</h4>
+                    <h5 class="text-muted">@lang('lang.text_files')</h5>
                 </div>
                 <div class="card-body">
                     <table class="table">

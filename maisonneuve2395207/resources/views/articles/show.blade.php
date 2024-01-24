@@ -4,14 +4,14 @@
     <div class="row">
         <div class="col-12 pt-2">
             <a href="{{ route('articles.index')}}" class="btn btn-outline-primary">@lang('lang.text_return')</a>
-            <h4 class="display-6 mt-2">
+            <h4 class="display-1 text-light mt-2">
                 {{ $article->title }}
             </h4>
-            <hr>
-            <p>
+            <hr class="text-light">
+            <p class="display-5 text-light mt-2">
                 <strong>@lang('lang.text_author'):</strong> {{ $article->hasUser?->name }}
             </p>
-            <p>
+            <p class="text-light mt-5 mb-5">
               <!--if you want to show html formated text stored in the db, you execute the html with the following: -->
                 {!! $article->text !!}
             </p>

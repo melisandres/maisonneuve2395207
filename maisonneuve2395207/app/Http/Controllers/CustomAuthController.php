@@ -68,7 +68,7 @@ class CustomAuthController extends Controller
         Auth::login($user);
 
         //return a view of the new etudiant;
-        return redirect(route('etudiants.show', $newEtudiant->id))->withSuccess(trans('lang.text_student_saved'));
+        return redirect(route('etudiants.show', $newEtudiant->user_id))->withSuccess(trans('lang.text_student_saved'));
     }
 
     public function authentication(Request $request){

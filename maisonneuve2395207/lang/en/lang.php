@@ -45,8 +45,8 @@ return [
     'text_registration' => 'Registration',
     'text_login' => 'Login',
     'text_students' => 'Students',
-    'text_articles' => 'Articles',
     'text_files' => 'Files',
+    'text_articles' => 'Articles',
     'text_logout' => 'Logout',
     //articles
     'article_title_english' => 'Title (english)',
@@ -58,8 +58,8 @@ return [
     //articles edit
     'article_edit_heading' => 'Edit your article',
     //articles index
-    'article_index_heading' => 'Click on an article to read it!',
-    'article_index_subheading' => 'Our articles',
+    'article_index_heading' => 'Our articles',
+    'article_index_subheading' => 'Click on an article to read it!',
     'articles_none' => 'No articles available!',
     //registration create
     'registration_create_heading' => 'Create an account',
@@ -79,7 +79,8 @@ return [
     'uploads_edit_heading' => 'Change this file',
     'text_choose_new_file' => 'Choose New File',
     //uploads index
-    'uploads_index_heading' => 'Click on a file to download it!',
+    'uploads_index_heading' => 'Our Files',
+    'text_instruction' => 'Click on a file to download it!',
     'files_none' => 'No files available!',
     //messages
     'text_access_denied' => 'Access denied without login.',
@@ -93,4 +94,5 @@ return [
     'text_upload_saved' => 'File uploaded successfully.',
     'text_upload_edit' => 'File updated successfully.',
     'text_upload_deleted' => 'File deleted!',
+    'text_by' => 'by',
 ];

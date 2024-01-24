@@ -45,8 +45,8 @@ return [
     'text_registration' => 'Inscription',
     'text_login' => 'Connexion',
     'text_students' => 'Étudiants',
-    'text_articles' => 'Articles',
     'text_files' => 'Fichiers',
+    'text_articles' => 'Articles',
     'text_logout' => 'Déconnexion',
     //articles
     'article_title_english' => 'Titre (anglais)',
@@ -58,8 +58,8 @@ return [
     //articles edit
     'article_edit_heading' => 'Modifier votre article',
     //articles index
-    'article_index_heading' => 'Cliquez sur un article pour le lire!',
-    'article_index_subheading' => 'Nos articles',
+    'article_index_heading' => 'Nos articles',
+    'article_index_subheading' => 'Cliquez sur un article pour le lire!',
     'articles_none' => 'Aucun article disponible!',
     //registration create
     'registration_create_heading' => 'Créer un compte',
@@ -79,7 +79,8 @@ return [
     'uploads_edit_heading' => 'Modifier ce fichier',
     'text_choose_new_file' => 'Choisir un nouveau fichier',
     //uploads index
-    'uploads_index_heading' => 'Cliquez sur un fichier pour le télécharger!',
+    'uploads_index_heading' => 'Nos Fichiers',
+    'text_instruction' => 'Cliquez sur un fichier pour le télécharger!',
     'files_none' => 'Aucun fichier disponible!',
     //messages
     'text_access_denied' => 'Accès refusé sans connexion',
@@ -93,4 +94,5 @@ return [
     'text_upload_saved' => 'Fichier téléchargé avec succès.',
     'text_upload_edit' => 'Fichier mis à jour avec succès.',
     'text_upload_deleted' => 'Fichier supprimé!',
+    'text_by' => 'par',
 ];
