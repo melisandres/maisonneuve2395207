@@ -129,7 +129,7 @@ class CustomAuthController extends Controller
             if($user->id === Auth::id()){
                 $villes = Ville::all();
                 $etudiant = $user->hasEtudiant;
-                return view('Auth.edit', compact('etudiant', 'villes', 'user'));
+                return view('auth.edit', compact('etudiant', 'villes', 'user'));
             }else{
                 return redirect()->back()->withErrors(trans('lang.text_denied'));
             }

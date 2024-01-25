@@ -27,7 +27,7 @@
             <hr class="text-light">
           
             <p class="display-5 text-light mt-2">
-                <strong>@lang('lang.text_author'):</strong> {{ $article->hasUser?->name }}
+                <strong>@lang('lang.text_author'):</strong> {{ $article->hasUser->name }}
             </p>
             <p class="text-light mt-5 mb-5">
               <!--if you want to show html formated text stored in the db, you execute the html with the following: -->
